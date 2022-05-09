@@ -4,8 +4,12 @@ using WorldGenerator.Utils;
 
 Console.WriteLine("Generating map...");
 
-Bitmap? noiseMap = Generator.GenerateSimpleNoise(512, 512);
+Bitmap? simplexNoiseMap = Generator.GenerateOpenSimplexNoise(32, 32);
+Bitmap? randomNoiseMap = Generator.GenerateSimpleNoise(32, 32);
+Bitmap? perlinNoiseMap = Generator.GeneratePerlinNoise(1024, 1024);
 
-IOUtils.SaveBitmapLocally("noisemap", noiseMap);
+IOUtils.SaveBitmapLocally("open simplex", simplexNoiseMap);
+IOUtils.SaveBitmapLocally("simple", randomNoiseMap);
+IOUtils.SaveBitmapLocally("perlin", perlinNoiseMap);
 
 Console.WriteLine("Map generated and saved.");
