@@ -1,5 +1,5 @@
-﻿using System.Drawing;
-using WorldGenerator.Utils;
+﻿using WorldGenerator.Utils;
+using SkiaSharp;
 
 namespace WorldGenerator.Core;
 
@@ -9,32 +9,32 @@ public class Generator
 
     private static readonly Random Rng = new();
 
-    private static Bitmap? _noiseMap;
+    private static SKBitmap _noiseMap;
     
     /// <summary>
     /// Returns simple noise in the form of a monochrome bitmap
     /// </summary>
     /// <param name="width"></param>
     /// <param name="height"></param>
-    public static Bitmap? GenerateSimpleNoise(int width, int height)
+    public static SKBitmap? GenerateSimpleNoise(int width, int height)
     {
-        _noiseMap = new Bitmap(width, height);
+        _noiseMap = new SKBitmap(width, height);
 
         for (var x = 0; x < _noiseMap.Width; x++)
         {
             for (var y = 0; y < _noiseMap.Height; y++)
             {
                 _randomValue = Rng.Next(0, 255);
-                _noiseMap.SetPixel(x, y, Color.FromArgb(_randomValue, _randomValue, _randomValue));
+                _noiseMap.SetPixel(x, y, SKColors.Bisque);
             }
         }
 
         return _noiseMap;
     }
-
-    public static Bitmap? GenerateOpenSimplexNoise(int width, int height)
+    
+    public static SKBitmap? GenerateOpenSimplexNoise(int width, int height)
     {
-        _noiseMap = new Bitmap(width, height);
+        _noiseMap = new SKBitmap(width, height);
 
         OpenSimplexNoise simplexNoise = new OpenSimplexNoise();
         
@@ -43,16 +43,16 @@ public class Generator
             for (var y = 0; y < _noiseMap.Height; y++)
             {
                 var value = MathUtils.Map(simplexNoise.Evaluate(x, y), -1f, 1f, 0f, 255f);
-                _noiseMap.SetPixel(x, y, Color.FromArgb((int)value, (int)value, (int)value));
+                _noiseMap.SetPixel(x, y, SKColors.Bisque);
             }
         }
         
         return _noiseMap;
     }
 
-    public static Bitmap? GeneratePerlinNoise(int width, int height)
+    public static SKBitmap? GeneratePerlinNoise(int width, int height)
     {
-        _noiseMap = new Bitmap(width, height);
+        _noiseMap = new SKBitmap(width, height);
 
         FastNoise perlinNoise = new FastNoise((int)DateTime.Now.Ticks);
         perlinNoise.SetNoiseType(FastNoise.NoiseType.Perlin);
@@ -73,7 +73,7 @@ public class Generator
                     min = perlinNoise.GetNoise(x, y);
 
                 var value = (int)MathUtils.Clamp(0, 255, MathUtils.Map(perlinNoise.GetNoise(x, y), -0.3f, 0.3f, 0f, 255f));
-                _noiseMap.SetPixel(x, y, Color.FromArgb(value, value, value));
+                _noiseMap.SetPixel(x, y, SKColors.Bisque);
             }
         }
         

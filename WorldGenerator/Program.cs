@@ -1,15 +1,16 @@
 ﻿using System.Drawing;
+using SkiaSharp;
 using WorldGenerator.Core;
 using WorldGenerator.Utils;
 
 Console.WriteLine("Generating map...");
 
-Bitmap? simplexNoiseMap = Generator.GenerateOpenSimplexNoise(32, 32);
-Bitmap? randomNoiseMap = Generator.GenerateSimpleNoise(32, 32);
-Bitmap? perlinNoiseMap = Generator.GeneratePerlinNoise(1024, 1024);
+SKBitmap simplexNoiseMap = Generator.GenerateOpenSimplexNoise(32, 32);
+SKBitmap randomNoiseMap = Generator.GenerateSimpleNoise(32, 32);
+SKBitmap perlinNoiseMap = Generator.GeneratePerlinNoise(1024, 1024);
 
-IOUtils.SaveBitmapLocally("open simplex", simplexNoiseMap);
-IOUtils.SaveBitmapLocally("simple", randomNoiseMap);
-IOUtils.SaveBitmapLocally("perlin", perlinNoiseMap);
+IOUtils.SaveSKBitmapLocally("open simplex", simplexNoiseMap);
+IOUtils.SaveSKBitmapLocally("simple", randomNoiseMap);
+IOUtils.SaveSKBitmapLocally("perlin", perlinNoiseMap);
 
 Console.WriteLine("Map generated and saved.");

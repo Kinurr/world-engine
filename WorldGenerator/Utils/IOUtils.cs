@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using SkiaSharp;
 
 namespace WorldGenerator.Utils;
 
@@ -13,5 +14,19 @@ public static class IOUtils
     {
         image.Save(Environment.CurrentDirectory + $"/{name}.bmp");
     }
-    
+
+    public static void SaveSKBitmapLocally(string name, SKBitmap bitmap)
+    {
+        
+        string path = Directory.GetCurrentDirectory() + String.Format($"{0}.png", name);
+
+        using (var image = SKImage.FromBitmap(bitmap))
+        using (var data = image.Encode(SKEncodedImageFormat.Png, 80))
+        {
+         using (var stream = File.OpenWrite(path))
+         {
+             data.SaveTo(stream);
+         }
+        }
+    }
 }
