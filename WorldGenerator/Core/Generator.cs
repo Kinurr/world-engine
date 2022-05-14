@@ -50,7 +50,7 @@ public class Generator
         return _noiseMap;
     }
 
-    public static SKBitmap? GeneratePerlinNoise(int width, int height)
+    public static SKBitmap GeneratePerlinNoise(int width, int height)
     {
         _noiseMap = new SKBitmap(width, height);
 
