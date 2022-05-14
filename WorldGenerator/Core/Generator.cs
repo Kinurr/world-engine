@@ -3,81 +3,71 @@ using SkiaSharp;
 
 namespace WorldGenerator.Core;
 
-public class Generator
+public static class Generator
 {
-    private static int _randomValue;
+    private static byte _randomValue;
 
     private static readonly Random Rng = new();
 
-    private static SKBitmap _noiseMap;
-    
+    private static SKBitmap? _noiseMap;
+
+    private static float _min, _max;
+
     /// <summary>
-    /// Returns simple noise in the form of a monochrome bitmap
+    /// Generates a monochromatic noise map.
     /// </summary>
-    /// <param name="width"></param>
-    /// <param name="height"></param>
-    public static SKBitmap? GenerateSimpleNoise(int width, int height)
+    /// <param name="width">Noise map width in pixels.</param>
+    /// <param name="height">Noise map height in pixels.</param>
+    /// <param name="noiseType">Type of noise to generate.</param>
+    /// <param name="frequency">Frequency value. Impacts generation.</param>
+    /// <param name="octaves">Octaves value. Impacts generation.</param>
+    /// <returns>An monochromatic noise map in the form of an object of type SKBitmap.</returns>
+    public static SKBitmap? GenerateNoise(int width, int height, FastNoise.NoiseType noiseType, float frequency, int octaves = 1)
     {
+        // Initializers.
         _noiseMap = new SKBitmap(width, height);
 
-        for (var x = 0; x < _noiseMap.Width; x++)
-        {
-            for (var y = 0; y < _noiseMap.Height; y++)
-            {
-                _randomValue = Rng.Next(0, 255);
-                _noiseMap.SetPixel(x, y, SKColors.Bisque);
-            }
-        }
+        var noiseGenerator = new FastNoise((int)DateTime.Now.Ticks);
+        noiseGenerator.SetNoiseType(noiseType);
+        noiseGenerator.SetFrequency(frequency);
+        noiseGenerator.SetFractalOctaves(octaves);
 
-        return _noiseMap;
-    }
-    
-    public static SKBitmap? GenerateOpenSimplexNoise(int width, int height)
-    {
-        _noiseMap = new SKBitmap(width, height);
-
-        OpenSimplexNoise simplexNoise = new OpenSimplexNoise();
+        // Get maximum and minimum values from noise in order to cap color values.
+        _max = 0f;
+        _min = 0f;
         
         for (var x = 0; x < _noiseMap.Width; x++)
         {
             for (var y = 0; y < _noiseMap.Height; y++)
             {
-                var value = MathUtils.Map(simplexNoise.Evaluate(x, y), -1f, 1f, 0f, 255f);
-                _noiseMap.SetPixel(x, y, SKColors.Bisque);
-            }
-        }
-        
-        return _noiseMap;
-    }
-
-    public static SKBitmap GeneratePerlinNoise(int width, int height)
-    {
-        _noiseMap = new SKBitmap(width, height);
-
-        FastNoise perlinNoise = new FastNoise((int)DateTime.Now.Ticks);
-        perlinNoise.SetNoiseType(FastNoise.NoiseType.Perlin);
-        perlinNoise.SetFrequency(0.005f);
-        // perlinNoise.SetCellularDistance2Indicies(500, 500);
-
-        var max = 0f;
-        var min = 0f;
-        
-        for (var x = 0; x < _noiseMap.Width; x++)
-        {
-            for (var y = 0; y < _noiseMap.Height; y++)
-            {
-                if (perlinNoise.GetNoise(x, y) > max)
-                    max = perlinNoise.GetNoise(x, y);
+                if (noiseGenerator.GetNoise(x, y) > _max)
+                    _max = noiseGenerator.GetNoise(x, y);
                 
-                if (perlinNoise.GetNoise(x, y) < min)
-                    min = perlinNoise.GetNoise(x, y);
-
-                var value = (int)MathUtils.Clamp(0, 255, MathUtils.Map(perlinNoise.GetNoise(x, y), -0.3f, 0.3f, 0f, 255f));
-                _noiseMap.SetPixel(x, y, SKColors.Bisque);
+                if (noiseGenerator.GetNoise(x, y) < _min)
+                    _min = noiseGenerator.GetNoise(x, y);
             }
         }
         
-        Console.WriteLine("Maximum: " + max + ", Minimum: "+ min);
+        // Draw noise map.
+        try
+        {
+            for (var x = 0; x < _noiseMap.Width; x++)
+            {
+                for (var y = 0; y < _noiseMap.Height; y++)
+                {
+                    _randomValue = (byte)MathUtils.Clamp(0, 255, MathUtils.Map(noiseGenerator.GetNoise(x, y), 
+                        _min, _max, 0f, 255f));
+                    _noiseMap.SetPixel(x, y, new SKColor(_randomValue, _randomValue, _randomValue));
+
+                }
+            }
+            
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
         
         return _noiseMap;
     }

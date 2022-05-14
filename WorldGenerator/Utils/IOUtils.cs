@@ -4,16 +4,24 @@ namespace WorldGenerator.Utils;
 
 public static class IOUtils
 {
-    public static void SaveSKBitmapLocally(string name, SKBitmap bitmap)
+    /// <summary>
+    /// Saved an SKBitmap as a .png to the disk. 
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="bitmap"></param>
+    public static void SaveSKBitmapLocally(string path, SKBitmap bitmap)
     {
-        
-        var path = Directory.GetCurrentDirectory() + String.Format($"{0}.png", name);
-        
-        Console.WriteLine("Path: " + path);
-
-        using var image = SKImage.FromBitmap(bitmap);
-        using var data = image.Encode(SKEncodedImageFormat.Png, 80);
-        using var stream = File.OpenWrite(path);
-        data.SaveTo(stream);
+        try
+        {
+            using var image = SKImage.FromBitmap(bitmap);
+            using var data = image.Encode(SKEncodedImageFormat.Png, 80);
+            using var stream = File.OpenWrite(path);
+            data.SaveTo(stream);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 }
