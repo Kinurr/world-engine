@@ -1,17 +1,27 @@
-﻿using System.Drawing;
+﻿using SkiaSharp;
 
 namespace WorldGenerator.Utils;
 
 public static class IOUtils
 {
     /// <summary>
-    /// Saves a bitmap locally
+    /// Saved an SKBitmap as a .png to the disk. 
     /// </summary>
-    /// <param name="name">The name of the bitmap to save</param>
-    /// <param name="image">The bitmap to store locally</param>
-    public static void SaveBitmapLocally(string name, Image? image)
+    /// <param name="name"></param>
+    /// <param name="bitmap"></param>
+    public static void SaveSKBitmapLocally(string path, SKBitmap bitmap)
     {
-        image.Save(Environment.CurrentDirectory + $"/{name}.bmp");
+        try
+        {
+            using var image = SKImage.FromBitmap(bitmap);
+            using var data = image.Encode(SKEncodedImageFormat.Png, 80);
+            using var stream = File.OpenWrite(path);
+            data.SaveTo(stream);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
-    
 }
