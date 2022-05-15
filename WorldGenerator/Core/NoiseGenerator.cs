@@ -3,11 +3,9 @@ using SkiaSharp;
 
 namespace WorldGenerator.Core;
 
-public static class Generator
+public static class NoiseGenerator
 {
     private static byte _randomValue;
-
-    private static readonly Random Rng = new();
 
     private static SKBitmap? _noiseMap;
 
@@ -47,6 +45,8 @@ public static class Generator
                     _min = noiseGenerator.GetNoise(x, y);
             }
         }
+        
+        Console.WriteLine("max: " + _max + ", min: " + _min);
         
         // Draw noise map.
         try
