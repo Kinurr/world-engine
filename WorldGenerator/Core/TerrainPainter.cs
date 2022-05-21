@@ -8,27 +8,27 @@ public class TerrainPainter
     
     private static SKColor shallowWaterColor = SKColors.Blue;
 
-    private static SKColor shoreColor = SKColors.Beige;
-    
-    private static SKColor grasslandsColor = SKColors.LightGreen;
-    
-    private static SKColor forestColor = SKColors.ForestGreen;
-    
-    private static SKColor mountainColor = SKColors.DarkGreen;
+    private static SKColor land = SKColors.Bisque;
 
+	private static SKColor shallowLand = SKColors.Beige;
+
+	private static SKColor mediumLand = SKColors.Green;
+
+	private static SKColor highLand = SKColors.SaddleBrown;
+    
     private static SKBitmap _coloredMap;
 
-    public static SKBitmap PaintTerrain(SKBitmap noiseMap)
+    public static SKBitmap PaintTerrain(SKBitmap landMap, SKBitmap heightMap)
     {
-        _coloredMap = new SKBitmap(noiseMap.Width, noiseMap.Height);
+        _coloredMap = new SKBitmap(landMap.Width, landMap.Height);
         
-        for (int x = 0; x < noiseMap.Width; x++)
+        for (int x = 0; x < landMap.Width; x++)
         {
-            for (int y = 0; y < noiseMap.Height; y++)
+            for (int y = 0; y < landMap.Height; y++)
             {
-                if (noiseMap.GetPixel(x, y).Blue > 128)
+                if (landMap.GetPixel(x, y).Blue < 128)
                 {
-                    if (noiseMap.GetPixel(x, y).Blue < 140)
+                    if (landMap.GetPixel(x, y).Blue > 105)
                         _coloredMap.SetPixel(x, y, shallowWaterColor);
                     else
                         _coloredMap.SetPixel(x, y, deepWaterColor);
@@ -36,14 +36,12 @@ public class TerrainPainter
                 }
                 else
                 {
-                    if (noiseMap.GetPixel(x, y).Blue > 110)
-                        _coloredMap.SetPixel(x, y, shoreColor);
-                    else if (noiseMap.GetPixel(x, y).Blue > 90)
-                        _coloredMap.SetPixel(x, y, grasslandsColor);
-                    else if (noiseMap.GetPixel(x, y).Blue > 50)
-                        _coloredMap.SetPixel(x, y, forestColor);
-                    else 
-                        _coloredMap.SetPixel(x, y, mountainColor);
+					if(heightMap.GetPixel(x, y).Blue < 85)
+                    	_coloredMap.SetPixel(x, y, shallowLand);
+					else if(heightMap.GetPixel(x, y).Blue < 170)
+                    	_coloredMap.SetPixel(x, y, mediumLand);
+					else
+                    	_coloredMap.SetPixel(x, y, highLand);
                 }
             }
         }
