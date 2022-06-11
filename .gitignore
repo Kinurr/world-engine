@@ -312,4 +312,4 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 # Generated maps
-src/map.png
+src/MapMaker/map.png

@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapMaker", "MapMaker\MapMaker.csproj", "{FF45122C-C774-45D9-9065-57791F7B6917}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldGenerator", "WorldGenerator\WorldGenerator.csproj", "{FA5FF777-9077-4114-8F55-ED9DBD43C678}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF45122C-C774-45D9-9065-57791F7B6917}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF45122C-C774-45D9-9065-57791F7B6917}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF45122C-C774-45D9-9065-57791F7B6917}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF45122C-C774-45D9-9065-57791F7B6917}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA5FF777-9077-4114-8F55-ED9DBD43C678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA5FF777-9077-4114-8F55-ED9DBD43C678}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA5FF777-9077-4114-8F55-ED9DBD43C678}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA5FF777-9077-4114-8F55-ED9DBD43C678}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
