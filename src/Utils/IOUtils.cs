@@ -7,9 +7,9 @@ public static class IOUtils
     /// <summary>
     /// Saved an SKBitmap as a .png to the disk. 
     /// </summary>
-    /// <param name="name"></param>
+    /// <param name="path"></param>
     /// <param name="bitmap"></param>
-    public static void SaveSKBitmapLocally(string path, SKBitmap bitmap)
+    public static void SaveSKBitmapLocally(string path, SKBitmap? bitmap)
     {
         try
         {
