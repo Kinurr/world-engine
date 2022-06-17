@@ -3,4 +3,3 @@
 using WorldGenerator;
 
 Console.WriteLine("Hello, World!");
-Generator.TestGenerate();
