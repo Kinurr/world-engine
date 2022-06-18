@@ -18,6 +18,12 @@ public class Generator
 
     private List<Layer> layers;
 
+    public LayerTypes[] RequiredLayers =
+    {
+        LayerTypes.Water,
+        LayerTypes.Altitude
+    };
+
     public Generator(Ruleset ruleset)
     {
         Ruleset = ruleset;
@@ -32,13 +38,23 @@ public class Generator
 
     public World.World GenerateWorld()
     {
-        foreach (var layer in layers)
-        {
-            if(!layer.IsEmpty())
-                layer.Generate();
-        }
+        ValidateLayers();
+        
+        foreach (var layer in layers.Where(layer => !layer.IsEmpty()))
+            layer.Generate();
 
         return new World.World();
+    }
+
+    private void ValidateLayers()
+    {
+        var currentLayerTypes = new List<LayerTypes>();
+
+        foreach (var layer in layers)
+            currentLayerTypes.Add(layer.LayerType);
+        
+        if (RequiredLayers.Except(currentLayerTypes).Any())
+            throw new Exception("Missing required layers.");
     }
 
     // public static void TestGenerate()
