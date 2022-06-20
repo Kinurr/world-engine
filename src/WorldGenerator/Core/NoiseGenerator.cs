@@ -13,17 +13,17 @@ public static class NoiseGenerator
     /// </summary>
     /// <param name="width">Noise map width in pixels.</param>
     /// <param name="height">Noise map height in pixels.</param>
+    /// <param name="seed">Seed for the generator.</param>
     /// <param name="noiseType">Type of noise to generate.</param>
     /// <param name="frequency">Frequency value. Impacts generation.</param>
     /// <param name="octaves">Octaves value. Impacts generation.</param>
-    /// <returns>An monochromatic noise map in the form of an object of type SKBitmap.</returns>
-    public static int[,] GenerateNoise(int width, int height, FastNoise.NoiseType noiseType, float frequency,
+    public static int[,] GenerateNoise(int width, int height, int seed, FastNoise.NoiseType noiseType, float frequency,
         int octaves = 1)
     {
         // Initializers.
         var noiseMap = new int[width, height];
 
-        var noiseGenerator = new FastNoise((int)DateTime.Now.Ticks);
+        var noiseGenerator = new FastNoise(seed);
         noiseGenerator.SetNoiseType(noiseType);
         noiseGenerator.SetFrequency(frequency);
         noiseGenerator.SetFractalOctaves(octaves);

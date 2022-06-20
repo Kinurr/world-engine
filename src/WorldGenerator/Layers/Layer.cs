@@ -19,7 +19,7 @@ public class Layer
     public string Name { get; set; }
 
     /// <summary>
-    /// Layer type.
+    /// Layer type.\\
     /// </summary>
     public LayerTypes LayerType { get; set; }
 
@@ -28,10 +28,11 @@ public class Layer
     /// </summary>
     /// <param name="seed">Seed used to generate layer.</param>
     /// <param name="ruleset"></param>
-    public Layer(string name, Ruleset ruleset)
+    public Layer(string name, Ruleset ruleset, LayerTypes type)
     {
         this.Name = name;
         this.ruleset = ruleset;
+        this.LayerType = type;
     }
 
     /// <summary>
@@ -41,7 +42,10 @@ public class Layer
     {
         try
         {
-            map = NoiseGenerator.GenerateNoise(ruleset.Width, ruleset.Height, FastNoise.NoiseType.PerlinFractal,
+            map = NoiseGenerator.GenerateNoise(ruleset.Width, 
+                ruleset.Height,
+                ruleset.Seed,
+                FastNoise.NoiseType.PerlinFractal,
                 ruleset.Frequency, ruleset.Octaves);
         }
         catch (Exception e)

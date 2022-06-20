@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿namespace WorldGenerator;
+
+using System.ComponentModel;
 using System.Data;
 using SkiaSharp;
 using WorldGenerator.Core;
@@ -7,14 +9,12 @@ using WorldGenerator.Rules;
 using WorldGenerator.Utils;
 using WorldGenerator.World;
 
-namespace WorldGenerator;
-
 /// <summary>
 /// A high level object capable of randomly generating a 2-dimensional map from a given ruleset and multiple layers.
 /// </summary>
 public class Generator
 {
-    public Ruleset Ruleset { get; set; }
+    public Ruleset Rules { get; set; }
 
     private List<Layer> layers;
 
@@ -24,15 +24,15 @@ public class Generator
         LayerTypes.Altitude
     };
 
-    public Generator(Ruleset ruleset)
+    public Generator(Ruleset rules)
     {
-        Ruleset = ruleset;
+        Rules = rules;
         layers = new List<Layer>();
     }
 
-    public Generator(Ruleset ruleset, List<Layer> layers)
+    public Generator(Ruleset rules, List<Layer> layers)
     {
-        Ruleset = ruleset;
+        Rules = rules;
         this.layers = layers;
     }
 
@@ -43,7 +43,10 @@ public class Generator
         foreach (var layer in layers.Where(layer => !layer.IsEmpty()))
             layer.Generate();
 
-        return new World.World();
+        var world = new World.World(Rules);
+
+        world.Generate(layers);
+        return world;
     }
 
     private void ValidateLayers()
