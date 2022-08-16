@@ -1,7 +1,7 @@
-﻿using WorldGenerator.Utils;
-using SkiaSharp;
+﻿using SkiaSharp;
+using WorldEngine.Utils;
 
-namespace WorldGenerator.Core;
+namespace WorldEngine.Core;
 
 /// <summary>
 /// Used to generate random noise.

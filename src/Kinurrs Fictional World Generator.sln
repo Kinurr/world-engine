@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapMaker", "MapMaker\MapMaker.csproj", "{FF45122C-C774-45D9-9065-57791F7B6917}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldGenerator", "WorldGenerator\WorldGenerator.csproj", "{FA5FF777-9077-4114-8F55-ED9DBD43C678}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldEngine", "WorldEngine\WorldEngine.csproj", "{FA5FF777-9077-4114-8F55-ED9DBD43C678}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{798D51F0-151C-48F0-90E8-D7CED06278CA}"
 EndProject

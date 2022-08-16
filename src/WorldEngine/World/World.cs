@@ -1,9 +1,9 @@
-﻿using WorldGenerator.Core;
-using WorldGenerator.Layers;
-using WorldGenerator.Rules;
-using WorldGenerator.Utils;
+﻿using WorldEngine.Layers;
+using WorldEngine.Rules;
+using WorldEngine.Core;
+using WorldEngine.Utils;
 
-namespace WorldGenerator.World;
+namespace WorldEngine.World;
 
 public class World
 {

@@ -1,4 +1,4 @@
-namespace WorldGenerator.World;
+namespace WorldEngine.World;
 
 public enum Biomes
 {

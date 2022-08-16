@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace WorldGenerator.World;
+namespace WorldEngine.World;
 
 public class WorldTile
 {
