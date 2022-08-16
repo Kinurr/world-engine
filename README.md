@@ -45,7 +45,7 @@ Distributed under the Unlicense License. See `LICENSE` for more information.
 * [FastNoise](https://jordanpeck.me/2016/05/fastnoise/)
 
 ### Contacts
-Project Link: [https://github.com/Kinurr/fictional-world-generator](https://github.com/Kinurr/fictional-world-generator)
+Project Link: [https://github.com/Kinurr/world-engine](https://github.com/Kinurr/world-engine)
 
 ### Acknowledgments
 * [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
