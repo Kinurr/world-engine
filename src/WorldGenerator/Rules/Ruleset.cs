@@ -15,13 +15,10 @@ public class Ruleset
     /// <param name="waterLevel">Map water level.</param>
     /// <param name="frequency">Perlin noise frequency.</param>
     /// <param name="octaves">Perlin noise octaves.</param>
-    public Ruleset(string name, int seed, int width = 1920, int height = 1080, int waterLevel = 90,
-        float frequency = 0.0025f, int octaves = 12)
+    public Ruleset(string name, int seed, float waterLevel = 0.002f, float frequency = 0.0025f, int octaves = 8)
     {
         Name = name;
         Seed = seed;
-        Width = width;
-        Height = height;
         WaterLevel = waterLevel;
         Frequency = frequency;
         Octaves = octaves;
@@ -36,21 +33,11 @@ public class Ruleset
     /// Seed for the map generator.
     /// </summary>
     public int Seed { get; set; }
-
-    /// <summary>
-    /// Map width in pixels.
-    /// </summary>
-    public int Width { get; set; }
-
-    /// <summary>
-    /// Map height in pixels.
-    /// </summary>
-    public int Height { get; set; }
-
+    
     /// <summary>
     /// Map water level.
     /// </summary>
-    public int WaterLevel { get; set; }
+    public float WaterLevel { get; set; }
 
     /// <summary>
     /// Perlin noise frequency.

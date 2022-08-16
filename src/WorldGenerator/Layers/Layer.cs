@@ -9,8 +9,6 @@ namespace WorldGenerator.Layers;
 /// </summary>
 public class Layer
 {
-    private int[,] map;
-
     private Ruleset ruleset;
 
     /// <summary>
@@ -19,47 +17,27 @@ public class Layer
     public string Name { get; set; }
 
     /// <summary>
-    /// Layer type.\\
+    /// Layer type.
     /// </summary>
     public LayerTypes LayerType { get; set; }
+    
+    /// <summary>
+    /// Layer ID.
+    /// </summary>
+    public int Id { get; set; }
 
     /// <summary>
     /// Initializes map layer.
     /// </summary>
     /// <param name="seed">Seed used to generate layer.</param>
     /// <param name="ruleset"></param>
-    public Layer(string name, Ruleset ruleset, LayerTypes type)
+    public Layer(string name, int id, Ruleset ruleset, LayerTypes type)
     {
         this.Name = name;
         this.ruleset = ruleset;
         this.LayerType = type;
+        this.Id = id;
     }
-
-    /// <summary>
-    /// Generates noisemap for this layer.
-    /// </summary>
-    public void Generate()
-    {
-        try
-        {
-            map = NoiseGenerator.GenerateNoise(ruleset.Width, 
-                ruleset.Height,
-                ruleset.Seed,
-                FastNoise.NoiseType.PerlinFractal,
-                ruleset.Frequency, ruleset.Octaves);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-    }
-
-    /// <summary>
-    /// Returns true if the layer has been gennerated.
-    /// </summary>
-    /// <returns></returns>
-    public bool IsEmpty() => map.Length <= 0;
 
     /// <summary>
     /// Returns the tile value at a given coordinate.
@@ -67,12 +45,22 @@ public class Layer
     /// <param name="x">X coordinate value.</param>
     /// <param name="y">Y coordinate value.</param>
     /// <returns></returns>
-    public int GetTileAt(int x, int y) => IsEmpty() ? 0 : map[x, y];
-
-    public int[,] GetTileChunkAt(int x, int y, int width, int height)
+    public float GetTileAt(int x, int y) =>
+        NoiseGenerator.GenerateNoise(x, y, ruleset.Seed, FastNoise.NoiseType.PerlinFractal, 
+            ruleset.Frequency, ruleset.Octaves);
+    
+    /// <summary>
+    /// Returns a chunk of tiles 
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <param name="width"></param>
+    /// <param name="height"></param>
+    /// <returns></returns>
+    public float[,] GetTileChunkAt(int x, int y, int width, int height)
     {
-        var chunk = new int[width, height];
-
+        var chunk = new float[width, height];
+    
         try
         {
             for (var i = 0; i < width; i++)
@@ -88,7 +76,7 @@ public class Layer
             Console.WriteLine(e);
             throw;
         }
-
+    
         return chunk;
     }
 }
