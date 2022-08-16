@@ -1,4 +1,4 @@
-﻿namespace WorldGenerator.Layers;
+﻿namespace WorldEngine.Layers;
 
 /// <summary>
 /// The different types of layers that overlap to compose a map.

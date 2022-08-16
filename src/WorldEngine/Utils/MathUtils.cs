@@ -1,4 +1,4 @@
-namespace WorldGenerator.Utils;
+namespace WorldEngine.Utils;
 
 public static class MathUtils
 {

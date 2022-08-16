@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
-using WorldGenerator;
-using WorldGenerator.Layers;
-using WorldGenerator.Rules;
+using WorldEngine;
+using WorldEngine.Layers;
+using WorldEngine.Rules;
 
 // Library usage.
 Console.WriteLine("Test generating world...");
@@ -21,7 +21,7 @@ Stopwatch stopwatch = new Stopwatch();
  
 stopwatch.Start();
 
-WorldGenerator.Debug.Tools.SaveWorldAsPng(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "map.png", world, 0, 0, 1920, 1080);
+WorldEngine.Debug.Tools.SaveWorldAsPng(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "map.png", world, 0, 0, 1920, 1080);
 
 stopwatch.Stop();
 

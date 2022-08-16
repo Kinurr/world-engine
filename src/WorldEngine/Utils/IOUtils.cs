@@ -1,6 +1,6 @@
 ﻿using SkiaSharp;
 
-namespace WorldGenerator.Utils;
+namespace WorldEngine.Utils;
 
 public static class IOUtils
 {

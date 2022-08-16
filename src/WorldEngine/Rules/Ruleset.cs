@@ -1,4 +1,4 @@
-namespace WorldGenerator.Rules;
+namespace WorldEngine.Rules;
 
 /// <summary>
 /// Ruleset for map generator. 

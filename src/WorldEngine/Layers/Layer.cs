@@ -1,8 +1,8 @@
-﻿using WorldGenerator.Core;
-using WorldGenerator.Rules;
-using WorldGenerator.Utils;
+﻿using WorldEngine.Core;
+using WorldEngine.Rules;
+using WorldEngine.Utils;
 
-namespace WorldGenerator.Layers;
+namespace WorldEngine.Layers;
 
 /// <summary>
 /// Represents a map layer.
