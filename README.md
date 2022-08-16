@@ -1,4 +1,4 @@
-# Kinurr's Fictional World Generator
+# World Engine
 
 A C# library that generates fictional landmasses. 
 
