@@ -1,25 +1,58 @@
-﻿using SkiaSharp;
+﻿namespace WorldGenerator;
+
+using System.ComponentModel;
+using System.Data;
+using SkiaSharp;
 using WorldGenerator.Core;
+using WorldGenerator.Layers;
 using WorldGenerator.Rules;
 using WorldGenerator.Utils;
+using WorldGenerator.World;
 
-namespace WorldGenerator;
-
-public static class Generator
+/// <summary>
+/// A high level object capable of randomly generating a 2-dimensional map from a given ruleset and multiple layers.
+/// </summary>
+public class Generator
 {
-    public static void TestGenerate()
+    public Ruleset Rules { get; set; }
+
+    private List<Layer> layers;
+
+    public LayerTypes[] RequiredLayers =
     {
-        Console.WriteLine("Printed from library.");
+        LayerTypes.Water,
+        LayerTypes.Altitude
+    };
+
+    public Generator(Ruleset rules)
+    {
+        Rules = rules;
+        layers = new List<Layer>();
+    }
+
+    public Generator(Ruleset rules, List<Layer> layers)
+    {
+        Rules = rules;
+        this.layers = layers;
+    }
+
+    public World.World CreateWorld()
+    {
+        ValidateLayers();
         
-        Console.WriteLine("Generating map...");
+        var world = new World.World(Rules, layers);
 
-        var rules = new Ruleset("Da Rules");
+        return world;
+    }
 
-        SKBitmap landMap = NoiseGenerator.GenerateNoise(1920, 1080, FastNoise.NoiseType.PerlinFractal, 0.0025f, 12);
-        SKBitmap heightMap = NoiseGenerator.GenerateNoise(1920, 1080, FastNoise.NoiseType.PerlinFractal, 0.0025f, 12);
+    private void ValidateLayers()
+    {
+        var currentLayerTypes = new List<LayerTypes>();
 
-        IOUtils.SaveSKBitmapLocally(Directory.GetCurrentDirectory() + "/map.png", TerrainPainter.PaintTerrain(landMap, heightMap));
+        foreach (var layer in layers)
+            currentLayerTypes.Add(layer.LayerType);
 
-        Console.WriteLine("Map generated and saved.");
+        if (RequiredLayers.Except(currentLayerTypes).Any())
+            throw new Exception("Missing required layers.");
     }
 }
