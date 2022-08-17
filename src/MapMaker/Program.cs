@@ -21,7 +21,7 @@ Stopwatch stopwatch = new Stopwatch();
  
 stopwatch.Start();
 
-WorldEngine.Debug.Tools.SaveWorldAsPng(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "map.png", world, 0, 0, 1920, 1080);
+WorldEngine.Debug.Tools.SaveWorldChunkAsPng(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "map.png", world, 0, 0, 1920, 1080);
 
 stopwatch.Stop();
 
