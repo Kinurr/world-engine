@@ -5,6 +5,8 @@
 /// </summary>
 public enum LayerTypes
 {
-    Water,
-    Altitude
+    Landmass,
+    Altitude,
+    Precipitation,
+    Temperature
 }

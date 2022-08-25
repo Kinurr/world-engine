@@ -9,34 +9,60 @@ namespace WorldEngine.Layers;
 /// </summary>
 public class Layer
 {
-    private Ruleset ruleset;
-
     /// <summary>
     /// Layer name.
     /// </summary>
-    public string Name { get; set; }
+    public string Name { get; }
 
     /// <summary>
     /// Layer type.
     /// </summary>
-    public LayerTypes LayerType { get; set; }
-    
+    public LayerTypes LayerType { get; }
+
     /// <summary>
     /// Layer ID.
     /// </summary>
-    public int Id { get; set; }
+    public int Id { get; }
+    
+    /// <summary>
+    /// Type of noise used to generate this layer.
+    /// </summary>
+    public FastNoise.NoiseType NoiseType { get; }
 
     /// <summary>
-    /// Initializes map layer.
+    /// Seed for the map generator.
     /// </summary>
-    /// <param name="seed">Seed used to generate layer.</param>
-    /// <param name="ruleset"></param>
-    public Layer(string name, int id, Ruleset ruleset, LayerTypes type)
+    public int Seed { get; }
+
+    /// <summary>
+    /// Perlin noise frequency.
+    /// </summary>
+    public float Frequency { get; }
+
+    /// <summary>
+    /// Perlin noise octaves.
+    /// </summary>
+    public int Octaves { get; }
+
+    /// <summary>
+    /// Initializes map layer
+    /// </summary>
+    /// <param name="name">Layer name</param>
+    /// <param name="id">Layer id</param>
+    /// <param name="ruleset">World ruleset</param>
+    /// <param name="type">Layer type</param>
+    /// <param name="seed">Generator seed</param>
+    /// <param name="frequency">Fractal perlin frequency</param>
+    /// <param name="octaves">Fractal perlin octaves</param>
+    public Layer(string name, int id, LayerTypes type, FastNoise.NoiseType noiseType, int seed, float frequency, int octaves)
     {
-        this.Name = name;
-        this.ruleset = ruleset;
-        this.LayerType = type;
-        this.Id = id;
+        Name = name;
+        LayerType = type;
+        Id = id;
+        Seed = seed;
+        Frequency = frequency;
+        Octaves = octaves;
+        NoiseType = noiseType;
     }
 
     /// <summary>
@@ -46,9 +72,8 @@ public class Layer
     /// <param name="y">Y coordinate value.</param>
     /// <returns></returns>
     public float GetTileAt(int x, int y) =>
-        NoiseGenerator.GenerateNoise(x, y, ruleset.Seed, FastNoise.NoiseType.PerlinFractal, 
-            ruleset.Frequency, ruleset.Octaves);
-    
+        NoiseGenerator.GenerateNoise(x, y, Seed / Id, FastNoise.NoiseType.PerlinFractal, Frequency, Octaves);
+
     /// <summary>
     /// Returns a chunk of tiles 
     /// </summary>
@@ -60,7 +85,7 @@ public class Layer
     public float[,] GetTileChunkAt(int x, int y, int width, int height)
     {
         var chunk = new float[width, height];
-    
+
         try
         {
             for (var i = 0; i < width; i++)
@@ -76,7 +101,7 @@ public class Layer
             Console.WriteLine(e);
             throw;
         }
-    
+
         return chunk;
     }
 }

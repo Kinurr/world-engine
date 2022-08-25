@@ -10,25 +10,22 @@ public class Ruleset
     /// </summary>
     /// <param name="name">Name of the ruleset.</param>
     /// <param name="seed">Seed for the map generator.</param>
-    /// <param name="width">Map width in pixels.</param>
-    /// <param name="height">Map width in pixels.</param>
     /// <param name="waterLevel">Map water level.</param>
     /// <param name="frequency">Perlin noise frequency.</param>
     /// <param name="octaves">Perlin noise octaves.</param>
-    public Ruleset(string name, int seed, float waterLevel = 0.002f, float frequency = 0.0025f, int octaves = 8)
+    public Ruleset(string name, int seed, float waterLevel = 0.002f, int maxAltitude = 1000)
     {
         Name = name;
         Seed = seed;
         WaterLevel = waterLevel;
-        Frequency = frequency;
-        Octaves = octaves;
+        MaxAltitude = maxAltitude;
     }
 
     /// <summary>
     /// Name of the ruleset.
     /// </summary>
     public string Name { get; set; }
-
+    
     /// <summary>
     /// Seed for the map generator.
     /// </summary>
@@ -38,14 +35,9 @@ public class Ruleset
     /// Map water level.
     /// </summary>
     public float WaterLevel { get; set; }
-
+    
     /// <summary>
-    /// Perlin noise frequency.
+    /// Maximum altitude in m relative to sea level.
     /// </summary>
-    public float Frequency { get; set; }
-
-    /// <summary>
-    /// Perlin noise octaves.
-    /// </summary>
-    public int Octaves { get; set; }
+    public float MaxAltitude { get; set; }
 }

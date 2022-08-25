@@ -8,8 +8,7 @@ public static class Tools
 {
     public static async Task SaveWorldChunkAsPng(string path, World.World world, int xOrigin, int yOrigin, int width, int height)
     {
-        Console.WriteLine(String.Format("Saving map chunk as png. Origin point: ({0}, {1}) Size: {2} by {3}px",
-            xOrigin, yOrigin, width, height));
+        Console.WriteLine($"Saving map chunk as png. Origin point: ({xOrigin}, {yOrigin}) Size: {width} by {height}px");
         var data = SKImage.FromBitmap(CreateWorldBitmap(world, xOrigin, yOrigin, width, height)).Encode(SKEncodedImageFormat.Png, 100);
         await using (var stream = File.OpenWrite(path))
         {
@@ -23,14 +22,24 @@ public static class Tools
     {
         var bitmap = new SKBitmap(width, height);
         int x = 0, y;
+        WorldTile _tile;
         
         for (int i = xOrigin; i < xOrigin + width; i++)
         {
             y = 0;
             for (int j = yOrigin; j < yOrigin + height; j++)
             {
-                bitmap.SetPixel(x, y, world.GetTileAt(i, j).Biome == Biomes.Water ? 
-                    SKColors.MediumBlue : SKColors.Bisque);
+                _tile = world.GetTileAt(i, j);
+
+                if (_tile.Biome == Biomes.Water)
+                    bitmap.SetPixel(x, y, SKColors.Bisque);
+                else
+                {
+                    var altitude = (byte)Utils.MathUtils.Map(_tile.Altitude, 0, 1000, 0, 255);
+                    // Console.WriteLine($"Altitude ({x}, {y}) - {_tile.Altitude}");
+                    bitmap.SetPixel(x, y, new SKColor(altitude, altitude, altitude));
+                }
+                
                 y++;
             }
             x++;
