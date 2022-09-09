@@ -17,14 +17,18 @@ public static class NoiseGenerator
     /// <param name="noiseType">Type of noise to generate.</param>
     /// <param name="frequency">Frequency value. Impacts generation.</param>
     /// <param name="octaves">Octaves value. Impacts generation.</param>
-    public static float GenerateNoise(int x, int y, int seed, FastNoise.NoiseType noiseType, float frequency,
+    public static float GenerateNoise(int x, int y, int seed, FastNoiseLite.NoiseType noiseType, float frequency,
         int octaves = 1)
     {
         // Initializers.
-        var noiseGenerator = new FastNoise(seed);
-        noiseGenerator.SetNoiseType(noiseType);
-        noiseGenerator.SetFrequency(frequency);
-        noiseGenerator.SetFractalOctaves(octaves);
+        var noiseGenerator = new FastNoiseLite(seed);
+        noiseGenerator.SetNoiseType(FastNoiseLite.NoiseType.Value);
+        noiseGenerator.SetFrequency(.005f);
+        noiseGenerator.SetFractalType(FastNoiseLite.FractalType.FBm);
+        noiseGenerator.SetFractalOctaves(6);
+        noiseGenerator.SetFractalGain(.4f);
+        noiseGenerator.SetFractalLacunarity(2);
+        // noiseGenerator.SetFractalGain(octaves);
 
         return noiseGenerator.GetNoise(x, y);
     }

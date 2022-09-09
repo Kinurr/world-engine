@@ -9,12 +9,14 @@ using WorldEngine.Utils;
 // Library usage.
 Console.WriteLine("Test generating world...");
 
-var ruleset = new Ruleset("Da Rules", 1000, 0.0025f, 1000);
+var ruleset = new Ruleset("Da Rules", 1000, 0.0025f);
 
 var layers = new List<Layer>();
 
-layers.Add(new Layer("Land", 1, LayerTypes.Landmass, FastNoise.NoiseType.PerlinFractal, 1000, .0025f, 8));
-layers.Add(new Layer("Height", 2, LayerTypes.Altitude, FastNoise.NoiseType.PerlinFractal, 1000, .0003f, 12));
+layers.Add(new Layer("Land", 1, LayerTypes.Landmass, FastNoiseLite.NoiseType.Value, 1000, .0025f, 8));
+layers.Add(new Layer("Height", 2, LayerTypes.Altitude, FastNoiseLite.NoiseType.Value, 1000, .0003f, 12));
+layers.Add(new Layer("Precipitation", 3, LayerTypes.Precipitation, FastNoiseLite.NoiseType.Value, 1000, .0003f, 4));
+layers.Add(new Layer("Temperature", 4, LayerTypes.Temperature, FastNoiseLite.NoiseType.Value, 1000, .0003f, 4));
 
 var generator = new Generator(ruleset, layers);
 

@@ -32,12 +32,14 @@ public static class Tools
                 _tile = world.GetTileAt(i, j);
 
                 if (_tile.Biome == Biomes.Water)
-                    bitmap.SetPixel(x, y, SKColors.Bisque);
+                    bitmap.SetPixel(x, y, SKColors.DarkBlue);
                 else
                 {
-                    var altitude = (byte)Utils.MathUtils.Map(_tile.Altitude, 0, 1000, 0, 255);
-                    // Console.WriteLine($"Altitude ({x}, {y}) - {_tile.Altitude}");
-                    bitmap.SetPixel(x, y, new SKColor(altitude, altitude, altitude));
+                    bitmap.SetPixel(x, y, SKColors.Bisque);
+
+                    // var altitude = (byte)Utils.MathUtils.Map(_tile.Altitude, 0, 1000, 0, 255);
+                    // // Console.WriteLine($"Altitude ({x}, {y}) - {_tile.Altitude}");
+                    // bitmap.SetPixel(x, y, new SKColor(altitude, altitude, altitude));
                 }
                 
                 y++;

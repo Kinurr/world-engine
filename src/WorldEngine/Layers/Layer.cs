@@ -1,4 +1,5 @@
-﻿using WorldEngine.Core;
+﻿using System.Data;
+using WorldEngine.Core;
 using WorldEngine.Rules;
 using WorldEngine.Utils;
 
@@ -27,7 +28,7 @@ public class Layer
     /// <summary>
     /// Type of noise used to generate this layer.
     /// </summary>
-    public FastNoise.NoiseType NoiseType { get; }
+    public FastNoiseLite.NoiseType NoiseType { get; }
 
     /// <summary>
     /// Seed for the map generator.
@@ -44,6 +45,8 @@ public class Layer
     /// </summary>
     public int Octaves { get; }
 
+    private float max = 0, min = 0;
+    
     /// <summary>
     /// Initializes map layer
     /// </summary>
@@ -54,7 +57,7 @@ public class Layer
     /// <param name="seed">Generator seed</param>
     /// <param name="frequency">Fractal perlin frequency</param>
     /// <param name="octaves">Fractal perlin octaves</param>
-    public Layer(string name, int id, LayerTypes type, FastNoise.NoiseType noiseType, int seed, float frequency, int octaves)
+    public Layer(string name, int id, LayerTypes type, FastNoiseLite.NoiseType noiseType, int seed, float frequency, int octaves)
     {
         Name = name;
         LayerType = type;
@@ -71,8 +74,29 @@ public class Layer
     /// <param name="x">X coordinate value.</param>
     /// <param name="y">Y coordinate value.</param>
     /// <returns></returns>
-    public float GetTileAt(int x, int y) =>
-        NoiseGenerator.GenerateNoise(x, y, Seed / Id, FastNoise.NoiseType.PerlinFractal, Frequency, Octaves);
+    public float GetTileAt(int x, int y)
+    {
+        var value = NoiseGenerator.GenerateNoise(x, y, Seed / Id, NoiseType, Frequency, Octaves);
+
+        // if (LayerType == LayerTypes.Landmass)
+        // {
+        //     if (max == 0)
+        //         max = value;
+        //     
+        //     if (min == 0)
+        //         min = value;
+        //
+        //     if (value > max)
+        //         max = value;
+        //
+        //     if (value < min)
+        //         min = value;
+        //     
+        //     Console.WriteLine($"{value} max: {max}, min: {min}");
+        // }
+        
+        return value;
+    }
 
     /// <summary>
     /// Returns a chunk of tiles 
