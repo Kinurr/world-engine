@@ -12,8 +12,6 @@ public class World
 
     public List<Layer> Layers { get; set; }
     
-    private float max = 0, min = 0;
-
     public World(Ruleset rules, List<Layer> layers)
     {
         Rules = rules;
@@ -38,17 +36,10 @@ public class World
         {
             _tile = new WorldTile(x, y, Biomes.Land,
                 GetAltitude(landmassLayer.GetTileAt(x, y), altitudeLayer.GetTileAt(x, y)),
-                GetPrecipitation(precipitationLayer.GetTileAt(x, y)),
-                GetTemperature(temperatureLayer.GetTileAt(x, y)));
+                GetTemperature(precipitationLayer.GetTileAt(x, y)),
+                GetPrecipitation(temperatureLayer.GetTileAt(x, y)));
 
-            if (landmassLayer.GetTileAt(x, y) > max)
-                max = landmassLayer.GetTileAt(x, y);
-            
-            
-            if (landmassLayer.GetTileAt(x, y) < min)
-                min = landmassLayer.GetTileAt(x, y);
-            
-            // Console.WriteLine($"({x}, {y}) - {_tile.Altitude} m - {temperatureLayer.GetTileAt(x, y)} Cº - {precipitationLayer.GetTileAt(x, y)} cm - max: {max} min: {min}");
+            Console.WriteLine($"({x}, {y}) - {_tile.Altitude} m - {_tile.Temperature} Cº - {_tile.Precipitation} cm²");
         }
 
         return _tile;
@@ -58,10 +49,10 @@ public class World
         (int)(MathF.Abs(landmassValue + (altitudeValue / 2)) * Rules.MaxAltitude);
 
     private int GetPrecipitation(float precipitationValue) =>
-        (int)Utils.MathUtils.Map(precipitationValue, -.5f, .5f, 0, Rules.MaxPrecipitation);
+        (int)Utils.MathUtils.Map(precipitationValue, -1f, .1f, 0, Rules.MaxPrecipitation);
 
     private int GetTemperature(float temperatureValue) => 
-        (int)Utils.MathUtils.Map(temperatureValue, -.5f, .5f, Rules.MinTemperature, Rules.MaxTemperature);
+        (int)Utils.MathUtils.Map(temperatureValue, -1f, .1f, Rules.MinTemperature, Rules.MaxTemperature);
 
 
 }

@@ -26,24 +26,14 @@ public class Layer
     public int Id { get; }
     
     /// <summary>
-    /// Type of noise used to generate this layer.
-    /// </summary>
-    public FastNoiseLite.NoiseType NoiseType { get; }
-
-    /// <summary>
     /// Seed for the map generator.
     /// </summary>
     public int Seed { get; }
 
     /// <summary>
-    /// Perlin noise frequency.
+    /// Noise profile.
     /// </summary>
-    public float Frequency { get; }
-
-    /// <summary>
-    /// Perlin noise octaves.
-    /// </summary>
-    public int Octaves { get; }
+    public NoiseProfile NoiseProfile { get; }
 
     private float max = 0, min = 0;
     
@@ -52,20 +42,16 @@ public class Layer
     /// </summary>
     /// <param name="name">Layer name</param>
     /// <param name="id">Layer id</param>
-    /// <param name="ruleset">World ruleset</param>
+    /// <param name="noiseProfile">World ruleset</param>
     /// <param name="type">Layer type</param>
     /// <param name="seed">Generator seed</param>
-    /// <param name="frequency">Fractal perlin frequency</param>
-    /// <param name="octaves">Fractal perlin octaves</param>
-    public Layer(string name, int id, LayerTypes type, FastNoiseLite.NoiseType noiseType, int seed, float frequency, int octaves)
+    public Layer(string name, int id, LayerTypes type, int seed, NoiseProfile noiseProfile)
     {
         Name = name;
         LayerType = type;
         Id = id;
         Seed = seed;
-        Frequency = frequency;
-        Octaves = octaves;
-        NoiseType = noiseType;
+        NoiseProfile = noiseProfile;
     }
 
     /// <summary>
@@ -76,9 +62,9 @@ public class Layer
     /// <returns></returns>
     public float GetTileAt(int x, int y)
     {
-        var value = NoiseGenerator.GenerateNoise(x, y, Seed / Id, NoiseType, Frequency, Octaves);
+        var value = NoiseGenerator.GetNoise(x, y, Seed / Id, NoiseProfile);
 
-        // if (LayerType == LayerTypes.Landmass)
+        // if (LayerType == LayerTypes.Precipitation)
         // {
         //     if (max == 0)
         //         max = value;
