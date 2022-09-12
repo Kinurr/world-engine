@@ -49,10 +49,10 @@ public class World
         (int)(MathF.Abs(landmassValue + (altitudeValue / 2)) * Rules.MaxAltitude);
 
     private int GetPrecipitation(float precipitationValue) =>
-        (int)Utils.MathUtils.Map(precipitationValue, -1f, .1f, 0, Rules.MaxPrecipitation);
+        (int)Utils.MathUtils.Remap(precipitationValue, -1f, .1f, 0, Rules.MaxPrecipitation);
 
     private int GetTemperature(float temperatureValue) => 
-        (int)Utils.MathUtils.Map(temperatureValue, -1f, .1f, Rules.MinTemperature, Rules.MaxTemperature);
+        (int)Utils.MathUtils.Remap(temperatureValue, -1f, .1f, Rules.MinTemperature, Rules.MaxTemperature);
 
 
 }
