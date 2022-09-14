@@ -12,6 +12,7 @@ public class Ruleset
     /// <param name="seed">Seed for the map generator.</param>
     /// <param name="waterLevel">Map water level.</param>
     /// <param name="maxAltitude">Maximum altitude in m relative to sea level in m.</param>
+    /// <param name="minPrecipitation">Minimum average annual precipitation in cm.</param>
     /// <param name="maxPrecipitation">Maximum average annual precipitation in cm.</param>
     /// <param name="minTemperature">Minimum average annual temperature in Cº</param>
     /// <param name="maxTemperature">Maximum average annual temperature in Cº</param>
@@ -19,7 +20,8 @@ public class Ruleset
         int seed, 
         float waterLevel = 0.002f, 
         int maxAltitude = 1000, 
-        int maxPrecipitation = 400,
+        int minPrecipitation = 0,
+        int maxPrecipitation = 500,
         int minTemperature = -10,
         int maxTemperature = 30)
     {
@@ -27,6 +29,7 @@ public class Ruleset
         Seed = seed;
         WaterLevel = waterLevel;
         MaxAltitude = maxAltitude;
+        MinPrecipitation = minPrecipitation;
         MaxPrecipitation = maxPrecipitation;
         MinTemperature = minTemperature;
         MaxTemperature = maxTemperature;
@@ -51,6 +54,11 @@ public class Ruleset
     /// Maximum altitude in m relative to sea level in m.
     /// </summary>
     public int MaxAltitude { get; }
+    
+    /// <summary>
+    /// Minimum average annual precipitation in cm.
+    /// </summary>
+    public int MinPrecipitation { get; }
     
     /// <summary>
     /// Maximum average annual precipitation in cm.

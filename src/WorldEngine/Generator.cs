@@ -23,7 +23,10 @@ public class Generator
 
     public LayerTypes[] RequiredLayers =
     {
-        LayerTypes.Landmass
+        LayerTypes.Landmass,
+        LayerTypes.Altitude,
+        LayerTypes.Precipitation,
+        LayerTypes.Temperature
     };
 
     public Generator(Ruleset rules)

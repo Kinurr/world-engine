@@ -7,7 +7,7 @@ public class WorldTile
     /// <summary>
     /// Ecological biome of this tile.
     /// </summary>
-    public Biomes Biome { get; }
+    public BiomeTypes Biome { get; }
 
     /// <summary>
     /// 2D X coordinate
@@ -35,7 +35,7 @@ public class WorldTile
     public int Precipitation { get; }
 
     
-    public WorldTile(int x, int y, Biomes biome, int altitude, int temperature, int precipitation)
+    public WorldTile(int x, int y, BiomeTypes biome, int altitude, int temperature, int precipitation)
     {
         Biome = biome;
         XCoordinate = x;

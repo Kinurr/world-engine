@@ -30,18 +30,58 @@ public static class Tools
             for (int j = yOrigin; j < yOrigin + height; j++)
             {
                 _tile = world.GetTileAt(i, j);
+                SKColor color;
 
-                if (_tile.Biome == Biomes.Water)
-                    bitmap.SetPixel(x, y, SKColors.DarkBlue);
-                else
+                switch (_tile.Biome)
                 {
-                    bitmap.SetPixel(x, y, SKColors.Bisque);
-
-                    // var altitude = (byte)Utils.MathUtils.Map(_tile.Altitude, 0, 1000, 0, 255);
-                    // // Console.WriteLine($"Altitude ({x}, {y}) - {_tile.Altitude}");
-                    // bitmap.SetPixel(x, y, new SKColor(altitude, altitude, altitude));
+                    case BiomeTypes.ShallowOcean:
+                        color = SKColors.RoyalBlue;
+                        break;
+                    case BiomeTypes.DeepOcean:
+                        color = SKColors.DarkBlue;
+                        break;
+                    case BiomeTypes.Beach:
+                        color = SKColors.LightYellow;
+                        break;
+                    case BiomeTypes.Savanna:
+                        color = SKColors.Goldenrod;
+                        break;
+                    case BiomeTypes.Desert:
+                        color = SKColors.Gold;
+                        break;
+                    case BiomeTypes.Grassland:
+                        color = SKColors.LightGreen;
+                        break;
+                    case BiomeTypes.Forest:
+                        color = SKColors.ForestGreen;
+                        break;
+                    case BiomeTypes.TropicalForest:
+                        color = SKColors.DarkGreen;
+                        break;
+                    case BiomeTypes.Tundra:
+                        color = SKColors.Snow;
+                        break;
+                    case BiomeTypes.MountainBase:
+                        color = SKColors.Peru;
+                        break;
+                    case BiomeTypes.Mountain:
+                        color = SKColors.Chocolate;
+                        break;
+                    case BiomeTypes.MountainTop:
+                        color = SKColors.SaddleBrown;
+                        break;
+                    case BiomeTypes.Summit:
+                        color = SKColors.GhostWhite;
+                        break;
+                    case BiomeTypes.Null:
+                        color = SKColors.HotPink;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
                 
+                bitmap.SetPixel(x, y, color);
+
                 y++;
             }
             x++;

@@ -14,10 +14,12 @@ var ruleset = new Ruleset("Da Rules", 1000, 0.0025f);
 
 var layers = new List<Layer>();
 
-var landProfile = new NoiseProfile(FastNoiseLite.NoiseType.Value, 0.005f, FastNoiseLite.FractalType.FBm, 6, 0.4f, 2);
-var heightProfile = new NoiseProfile(FastNoiseLite.NoiseType.Value, 0.005f, FastNoiseLite.FractalType.FBm, 6, 0.4f, 2);
-var precipitationProfile = new NoiseProfile(FastNoiseLite.NoiseType.Perlin, 0.005f, FastNoiseLite.FractalType.None, 6, 0.4f, 2);
-var temperatureProfile= new NoiseProfile(FastNoiseLite.NoiseType.Perlin, 0.005f, FastNoiseLite.FractalType.None, 6, 0.4f, 2);
+const float frequencyMultiplier = 1f;
+
+var landProfile = new NoiseProfile(FastNoiseLite.NoiseType.Value, 0.005f * frequencyMultiplier, FastNoiseLite.FractalType.FBm, 6, 0.4f, 2);
+var heightProfile = new NoiseProfile(FastNoiseLite.NoiseType.Value, 0.005f * frequencyMultiplier, FastNoiseLite.FractalType.FBm, 6, 0.4f, 2);
+var precipitationProfile = new NoiseProfile(FastNoiseLite.NoiseType.Value, 0.0015f * frequencyMultiplier, FastNoiseLite.FractalType.FBm, 6, .4f, 2);
+var temperatureProfile= new NoiseProfile(FastNoiseLite.NoiseType.Value, 0.0020f * frequencyMultiplier, FastNoiseLite.FractalType.FBm, 6, .4f, 2);
 
 var seed = (int)new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
 
