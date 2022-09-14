@@ -1,4 +1,5 @@
-﻿using WorldEngine.Core;
+﻿using System.Data;
+using WorldEngine.Core;
 using WorldEngine.Rules;
 using WorldEngine.Utils;
 
@@ -9,34 +10,48 @@ namespace WorldEngine.Layers;
 /// </summary>
 public class Layer
 {
-    private Ruleset ruleset;
-
     /// <summary>
     /// Layer name.
     /// </summary>
-    public string Name { get; set; }
+    public string Name { get; }
 
     /// <summary>
     /// Layer type.
     /// </summary>
-    public LayerTypes LayerType { get; set; }
-    
+    public LayerTypes LayerType { get; }
+
     /// <summary>
     /// Layer ID.
     /// </summary>
-    public int Id { get; set; }
+    public int Id { get; }
+    
+    /// <summary>
+    /// Seed for the map generator.
+    /// </summary>
+    public int Seed { get; }
 
     /// <summary>
-    /// Initializes map layer.
+    /// Noise profile.
     /// </summary>
-    /// <param name="seed">Seed used to generate layer.</param>
-    /// <param name="ruleset"></param>
-    public Layer(string name, int id, Ruleset ruleset, LayerTypes type)
+    public NoiseProfile NoiseProfile { get; }
+
+    private float max = 0, min = 0;
+    
+    /// <summary>
+    /// Initializes map layer
+    /// </summary>
+    /// <param name="name">Layer name</param>
+    /// <param name="id">Layer id</param>
+    /// <param name="noiseProfile">World ruleset</param>
+    /// <param name="type">Layer type</param>
+    /// <param name="seed">Generator seed</param>
+    public Layer(string name, int id, LayerTypes type, int seed, NoiseProfile noiseProfile)
     {
-        this.Name = name;
-        this.ruleset = ruleset;
-        this.LayerType = type;
-        this.Id = id;
+        Name = name;
+        LayerType = type;
+        Id = id;
+        Seed = seed;
+        NoiseProfile = noiseProfile;
     }
 
     /// <summary>
@@ -45,10 +60,30 @@ public class Layer
     /// <param name="x">X coordinate value.</param>
     /// <param name="y">Y coordinate value.</param>
     /// <returns></returns>
-    public float GetTileAt(int x, int y) =>
-        NoiseGenerator.GenerateNoise(x, y, ruleset.Seed, FastNoise.NoiseType.PerlinFractal, 
-            ruleset.Frequency, ruleset.Octaves);
-    
+    public float GetTileAt(int x, int y)
+    {
+        var value = NoiseGenerator.GetNoise(x, y, Seed / Id, NoiseProfile);
+
+        // if (LayerType == LayerTypes.Precipitation)
+        // {
+        //     if (max == 0)
+        //         max = value;
+        //     
+        //     if (min == 0)
+        //         min = value;
+        //
+        //     if (value > max)
+        //         max = value;
+        //
+        //     if (value < min)
+        //         min = value;
+        //     
+        //     Console.WriteLine($"{value} max: {max}, min: {min}");
+        // }
+        
+        return value;
+    }
+
     /// <summary>
     /// Returns a chunk of tiles 
     /// </summary>
@@ -60,7 +95,7 @@ public class Layer
     public float[,] GetTileChunkAt(int x, int y, int width, int height)
     {
         var chunk = new float[width, height];
-    
+
         try
         {
             for (var i = 0; i < width; i++)
@@ -76,7 +111,7 @@ public class Layer
             Console.WriteLine(e);
             throw;
         }
-    
+
         return chunk;
     }
 }

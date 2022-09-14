@@ -10,42 +10,68 @@ public class Ruleset
     /// </summary>
     /// <param name="name">Name of the ruleset.</param>
     /// <param name="seed">Seed for the map generator.</param>
-    /// <param name="width">Map width in pixels.</param>
-    /// <param name="height">Map width in pixels.</param>
     /// <param name="waterLevel">Map water level.</param>
-    /// <param name="frequency">Perlin noise frequency.</param>
-    /// <param name="octaves">Perlin noise octaves.</param>
-    public Ruleset(string name, int seed, float waterLevel = 0.002f, float frequency = 0.0025f, int octaves = 8)
+    /// <param name="maxAltitude">Maximum altitude in m relative to sea level in m.</param>
+    /// <param name="minPrecipitation">Minimum average annual precipitation in cm.</param>
+    /// <param name="maxPrecipitation">Maximum average annual precipitation in cm.</param>
+    /// <param name="minTemperature">Minimum average annual temperature in Cº</param>
+    /// <param name="maxTemperature">Maximum average annual temperature in Cº</param>
+    public Ruleset(string name, 
+        int seed, 
+        float waterLevel = 0.002f, 
+        int maxAltitude = 1000, 
+        int minPrecipitation = 0,
+        int maxPrecipitation = 500,
+        int minTemperature = -10,
+        int maxTemperature = 30)
     {
         Name = name;
         Seed = seed;
         WaterLevel = waterLevel;
-        Frequency = frequency;
-        Octaves = octaves;
+        MaxAltitude = maxAltitude;
+        MinPrecipitation = minPrecipitation;
+        MaxPrecipitation = maxPrecipitation;
+        MinTemperature = minTemperature;
+        MaxTemperature = maxTemperature;
     }
 
     /// <summary>
     /// Name of the ruleset.
     /// </summary>
-    public string Name { get; set; }
-
+    public string Name { get; }
+    
     /// <summary>
     /// Seed for the map generator.
     /// </summary>
-    public int Seed { get; set; }
+    public int Seed { get; }
     
     /// <summary>
     /// Map water level.
     /// </summary>
-    public float WaterLevel { get; set; }
+    public float WaterLevel { get; }
+    
+    /// <summary>
+    /// Maximum altitude in m relative to sea level in m.
+    /// </summary>
+    public int MaxAltitude { get; }
+    
+    /// <summary>
+    /// Minimum average annual precipitation in cm.
+    /// </summary>
+    public int MinPrecipitation { get; }
+    
+    /// <summary>
+    /// Maximum average annual precipitation in cm.
+    /// </summary>
+    public int MaxPrecipitation { get; }
 
     /// <summary>
-    /// Perlin noise frequency.
+    /// Minimum average annual temperature in Cº 
     /// </summary>
-    public float Frequency { get; set; }
+    public int MinTemperature { get; }
 
     /// <summary>
-    /// Perlin noise octaves.
+    /// Maximum average annual temperature in Cº
     /// </summary>
-    public int Octaves { get; set; }
+    public int MaxTemperature { get; }
 }

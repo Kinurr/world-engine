@@ -1,27 +1,43 @@
 ﻿using System.Diagnostics;
 using WorldEngine;
+using WorldEngine.Core;
 using WorldEngine.Layers;
 using WorldEngine.Rules;
+using WorldEngine.Utils;
+
+// This class serves only to test the World Engine library.
 
 // Library usage.
 Console.WriteLine("Test generating world...");
 
-var ruleset = new Ruleset("Da Rules", (int)DateTime.Now.Ticks);
+var ruleset = new Ruleset("Da Rules", 1000, 0.0025f);
 
 var layers = new List<Layer>();
 
-layers.Add(new Layer("Water", 1, ruleset, LayerTypes.Water));
-layers.Add(new Layer("Altitude", 2, ruleset, LayerTypes.Altitude));
+const float frequencyMultiplier = 1f;
+
+var landProfile = new NoiseProfile(FastNoiseLite.NoiseType.Value, 0.005f * frequencyMultiplier, FastNoiseLite.FractalType.FBm, 6, 0.4f, 2);
+var heightProfile = new NoiseProfile(FastNoiseLite.NoiseType.Value, 0.005f * frequencyMultiplier, FastNoiseLite.FractalType.FBm, 6, 0.4f, 2);
+var precipitationProfile = new NoiseProfile(FastNoiseLite.NoiseType.Value, 0.0015f * frequencyMultiplier, FastNoiseLite.FractalType.FBm, 6, .4f, 2);
+var temperatureProfile= new NoiseProfile(FastNoiseLite.NoiseType.Value, 0.0020f * frequencyMultiplier, FastNoiseLite.FractalType.FBm, 6, .4f, 2);
+
+var seed = (int)new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
+
+layers.Add(new Layer("Land", 1, LayerTypes.Landmass, seed, landProfile));
+layers.Add(new Layer("Height", 2, LayerTypes.Altitude, seed, heightProfile));
+layers.Add(new Layer("Precipitation", 3, LayerTypes.Precipitation, seed, precipitationProfile));
+layers.Add(new Layer("Temperature", 4, LayerTypes.Temperature, seed, temperatureProfile));
 
 var generator = new Generator(ruleset, layers);
 
 var world = generator.CreateWorld();
 
 Stopwatch stopwatch = new Stopwatch();
- 
+
 stopwatch.Start();
 
-WorldEngine.Debug.Tools.SaveWorldChunkAsPng(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "map.png", world, 0, 0, 1920, 1080);
+await WorldEngine.Debug.Tools.SaveWorldChunkAsPng(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "map.png",
+    world, 0, 0, 1920, 1080);
 
 stopwatch.Stop();
 
