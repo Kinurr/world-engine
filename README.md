@@ -1,6 +1,6 @@
 # World Engine
 
-A C# library that generates fictional landmasses. 
+A C# library that generates fictional worlds. 
 
 ## What's this for?
 
