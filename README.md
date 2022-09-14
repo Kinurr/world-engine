@@ -30,11 +30,11 @@ The purpose of this project is to provide developers with a practical tool to pr
 - Procedural landmass generation;
 - Saving map to png;
 - Build as library;
+- Biomes;
+- Different noise maps for altitude, humidity, temperature...;
 
 ## To Be Implemented
 - Selective coastline smoothing;
-- Biomes;
-- Different noise maps for altitude, humidity, temperature...;
 - Scripted formations (rivers, volcanos, icecaps...);
 
 ### License
@@ -42,7 +42,7 @@ Distributed under the Unlicense License. See `LICENSE` for more information.
 
 ### Built With
 * [dotnet](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
-* [FastNoise](https://jordanpeck.me/2016/05/fastnoise/)
+* [FastNoiseLite](https://github.com/Auburn/FastNoiseLite)
 
 ### Contacts
 Project Link: [https://github.com/Kinurr/world-engine](https://github.com/Kinurr/world-engine)
