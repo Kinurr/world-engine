@@ -10,20 +10,17 @@ The purpose of this project is to provide developers with a practical tool to pr
 
 <details>
   <summary>Example 1</summary>
-  
-  ![map](https://user-images.githubusercontent.com/51026793/184919533-aad05aee-1f80-4bd7-8361-6cf7390635e5.png)
+  ![map](https://user-images.githubusercontent.com/51026793/190277506-0c0439e7-2bff-44e5-a7b2-224ae9fd191a.png)
 </details>
 
 <details>
   <summary>Example 2</summary>
-  
-  ![map](https://user-images.githubusercontent.com/51026793/184920320-5b04e73b-9b5d-4560-9b7f-e775c9f88917.png)
+  ![map2](https://user-images.githubusercontent.com/51026793/190277515-1630be8d-8cdc-4195-bccd-d5d51834d040.png)
 </details>
 
 <details>
   <summary>Example 3</summary>
-  
-  ![map](https://user-images.githubusercontent.com/51026793/184920408-98655af7-5b92-4b63-8066-e183a91376a3.png)
+  ![map3](https://user-images.githubusercontent.com/51026793/190277517-20dc90d7-5e5d-42ae-b14c-b3a6989be5da.png)
 </details>
 
 ## Current Features
