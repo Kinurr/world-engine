@@ -10,16 +10,19 @@ The purpose of this project is to provide developers with a practical tool to pr
 
 <details>
   <summary>Example 1</summary>
+  
   ![map](https://user-images.githubusercontent.com/51026793/190277506-0c0439e7-2bff-44e5-a7b2-224ae9fd191a.png)
 </details>
 
 <details>
   <summary>Example 2</summary>
+  
   ![map2](https://user-images.githubusercontent.com/51026793/190277515-1630be8d-8cdc-4195-bccd-d5d51834d040.png)
 </details>
 
 <details>
   <summary>Example 3</summary>
+  
   ![map3](https://user-images.githubusercontent.com/51026793/190277517-20dc90d7-5e5d-42ae-b14c-b3a6989be5da.png)
 </details>
 
