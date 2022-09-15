@@ -38,6 +38,8 @@ The purpose of this project is to provide developers with a practical tool to pr
 ## To Be Implemented
 - Selective coastline smoothing;
 - Scripted formations (rivers, volcanos, icecaps...);
+- Spawnrates for objects/entities in tiles;
+- Save and restore world state;
 
 ### License
 Distributed under the Unlicense License. See `LICENSE` for more information.
