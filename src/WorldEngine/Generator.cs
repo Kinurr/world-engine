@@ -6,7 +6,7 @@ namespace WorldEngine;
 using System.ComponentModel;
 using System.Data;
 using SkiaSharp;
-using WorldEngine.Core;
+using Noise;
 using WorldEngine.Layers;
 using WorldEngine.Rules;
 using WorldEngine.Utils;
