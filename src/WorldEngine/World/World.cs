@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using WorldEngine.Layers;
 using WorldEngine.Rules;
-using WorldEngine.Core;
+using WorldEngine.Noise;
 using WorldEngine.Utils;
 
 namespace WorldEngine.World;
