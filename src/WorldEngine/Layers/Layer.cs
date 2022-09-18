@@ -20,12 +20,7 @@ public class Layer
     /// <summary>
     /// Layer ID.
     /// </summary>
-    private int _id { get; }
-    
-    /// <summary>
-    /// Seed for the map generator.
-    /// </summary>
-    private int _seed { get; }
+    public int Id { get; set; }
 
     /// <summary>
     /// Noise profile.
@@ -40,13 +35,21 @@ public class Layer
     /// <param name="noise">Noise map</param>
     /// <param name="type">Layer type</param>
     /// <param name="seed">Generator seed</param>
-    public Layer(string name, int id, LayerTypes type, int seed, INoise noise)
+    public Layer(LayerTypes type, INoise noise)
     {
-        _name = name;
         LayerType = type;
-        _id = id;
-        _seed = seed;
         _noise = noise;
+    }
+
+    /// <summary>
+    /// Initializes noise generator if it hasn't been already.
+    /// </summary>
+    /// <param name="seed"></param>
+    public void SetupGenerator(int seed)
+    {
+        // If noise has no seed, initialize noise generator with seed.
+        if(_noise.Seed == null)
+            _noise.SetupGenerator(seed);
     }
 
     /// <summary>
