@@ -2,33 +2,60 @@
 
 namespace WorldEngine.Noise;
 
+/// <summary>
+/// Generator for fractal perlin noise.
+/// </summary>
 public class FractalPerlinNoise : INoise
 {
+    /// <summary>
+    /// Noise frequency.
+    /// </summary>
     private float _frequency;
+    
+    /// <summary>
+    /// Noise gain per octave.
+    /// </summary>
     private float _fractalGain;
+    
+    /// <summary>
+    /// Number of octaves to pass noise through.
+    /// </summary>
     private int _fractalOctaves;
+    
+    /// <summary>
+    /// Fractal lacunarity.
+    /// </summary>
     private int _fractalLacunarity;
-    private int _seed;
+    
+    /// <summary>
+    /// Seed for this noise generator.
+    /// </summary>
+    public int? Seed { get; }
 
+    /// <summary>
+    /// Generator object.
+    /// </summary>
     private FastNoiseLite? _generator;
 
-    public FractalPerlinNoise(int seed, float frequency, int fractalOctaves, float fractalGain, int fractalLacunarity)
+    public FractalPerlinNoise(float frequency, int fractalOctaves, float fractalGain, int fractalLacunarity, int? seed = null)
     {
-        _seed = seed;
         _frequency = frequency;
         _fractalOctaves = fractalOctaves;
         _fractalGain = fractalGain;
         _fractalLacunarity = fractalLacunarity;
+        Seed = seed;
 
-        SetupGenerator();
+        // If a seed is provided in the constructor params, initialize generator.
+        if (Seed != null)
+            SetupGenerator(Seed ?? 0);
     }
 
     /// <summary>
     /// Setup generator with assigned parameters.
     /// </summary>
-    private void SetupGenerator()
+    public void SetupGenerator(int seed)
     {
-        _generator = new FastNoiseLite(_seed);
+        _generator = new FastNoiseLite(seed);
 
         _generator.SetNoiseType(FastNoiseLite.NoiseType.Perlin);
         _generator.SetFractalType(FastNoiseLite.FractalType.FBm);
@@ -38,6 +65,13 @@ public class FractalPerlinNoise : INoise
         _generator.SetFractalLacunarity(_fractalLacunarity);
     }
 
+    /// <summary>
+    /// Returns a noise value for a pair of coordinates.
+    /// </summary>
+    /// <param name="x">X axis coordinate.</param>
+    /// <param name="y">Y axis coordinate.</param>
+    /// <returns></returns>
+    /// <exception cref="Exception">Throws exception in case generator hasn't been initialized yet.</exception>
     public float Get(int x, int y)
     {
         try

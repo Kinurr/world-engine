@@ -18,7 +18,7 @@ public class Ruleset
     /// <param name="maxTemperature">Maximum average annual temperature in Cº</param>
     public Ruleset(string name, 
         int seed, 
-        float waterLevel = 0.002f, 
+        float waterLevel = 0.0f, 
         int maxAltitude = 1000, 
         int minPrecipitation = 0,
         int maxPrecipitation = 500,
