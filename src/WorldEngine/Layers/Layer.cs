@@ -8,11 +8,6 @@ namespace WorldEngine.Layers;
 public class Layer
 {
     /// <summary>
-    /// Layer name.
-    /// </summary>
-    private string _name { get; }
-
-    /// <summary>
     /// Layer type.
     /// </summary>
     public LayerTypes LayerType { get; }
@@ -30,11 +25,8 @@ public class Layer
     /// <summary>
     /// Initializes map layer
     /// </summary>
-    /// <param name="name">Layer name</param>
-    /// <param name="id">Layer id</param>
     /// <param name="noise">Noise map</param>
     /// <param name="type">Layer type</param>
-    /// <param name="seed">Generator seed</param>
     public Layer(LayerTypes type, INoise noise)
     {
         LayerType = type;
