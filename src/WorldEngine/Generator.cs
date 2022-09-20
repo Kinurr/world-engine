@@ -19,45 +19,28 @@ public class Generator
 {
     public Ruleset Rules { get; set; }
 
-    private List<Layer> layers;
+    public Layer LandmassLayer { get; set; }
+    
+    public Layer AltitudeLayer { get; set; }
+    
+    public Layer PrecipitationLayer { get; set; }
+    
+    public Layer TemperatureLayer { get; set; }
 
-    public LayerTypes[] RequiredLayers =
-    {
-        LayerTypes.Landmass,
-        LayerTypes.Altitude,
-        LayerTypes.Precipitation,
-        LayerTypes.Temperature
-    };
-
-    public Generator(Ruleset rules)
+    public Generator(Ruleset rules, Layer landmassLayer, Layer altitudeLayer, Layer precipitationLayer, Layer temperatureLayer)
     {
         Rules = rules;
-        layers = new List<Layer>();
-    }
-
-    public Generator(Ruleset rules, List<Layer> layers)
-    {
-        Rules = rules;
-        this.layers = layers;
+        LandmassLayer = landmassLayer;
+        AltitudeLayer = altitudeLayer;
+        PrecipitationLayer = precipitationLayer;
+        TemperatureLayer = temperatureLayer;
     }
 
     public World.World CreateWorld()
     {
-        ValidateLayers();
-        
-        var world = new World.World(Rules, layers);
+        var world = new World.World(Rules, LandmassLayer, AltitudeLayer, PrecipitationLayer, TemperatureLayer);
 
         return world;
     }
-
-    private void ValidateLayers()
-    {
-        var currentLayerTypes = new List<LayerTypes>();
-
-        foreach (var layer in layers)
-            currentLayerTypes.Add(layer.LayerType);
-
-        if (RequiredLayers.Except(currentLayerTypes).Any())
-            throw new Exception("Missing required layers.");
-    }
+    
 }

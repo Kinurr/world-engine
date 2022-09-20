@@ -59,7 +59,7 @@ public static class Tools
                         color = SKColors.DarkGreen;
                         break;
                     case BiomeTypes.Tundra:
-                        color = SKColors.Snow;
+                        color = SKColors.White;
                         break;
                     case BiomeTypes.MountainBase:
                         color = SKColors.Peru;

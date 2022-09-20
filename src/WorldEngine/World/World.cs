@@ -8,50 +8,56 @@ public class World
 {
     private Ruleset _rules { get; }
 
-    private List<Layer> Layers { get; }
-    
-    public World(Ruleset rules, List<Layer> layers)
+    public Layer LandmassLayer { get; private set; }
+    public Layer AltitudeLayer { get; private set; }
+    public Layer PrecipitationLayer { get; private set; }
+    public Layer TemperatureLayer { get; private set; }
+
+    public World(Ruleset rules, Layer landmassLayer, Layer altitudeLayer, Layer precipitationLayer, Layer temperatureLayer)
     {
         _rules = rules;
-        Layers = layers;
-        
+        LandmassLayer = landmassLayer;
+        AltitudeLayer = altitudeLayer;
+        PrecipitationLayer = precipitationLayer;
+        TemperatureLayer = temperatureLayer;
         InitializeLayers();
     }
 
     private void InitializeLayers()
     {
-        foreach (var layer in Layers)
-        {
-            layer.Id = Layers.IndexOf(layer);
-            layer.SetupGenerator(_rules.Seed / (layer.Id + 1));
-        }
+        // Id attribution
+        LandmassLayer.Id = 1;
+        AltitudeLayer.Id = 2;
+        PrecipitationLayer.Id = 3;
+        TemperatureLayer.Id = 4;
+        
+        // Layer initialization
+        LandmassLayer.SetupGenerator(_rules.Seed);
+        AltitudeLayer.SetupGenerator(_rules.Seed / 2);
+        PrecipitationLayer.SetupGenerator(_rules.Seed / 3);
+        TemperatureLayer.SetupGenerator(_rules.Seed / 4);
     }
 
     public WorldTile GetTileAt(int x, int y)
     {
-        var landmassLayer = Layers.FirstOrDefault(l => l.LayerType == LayerTypes.Landmass);
-        var altitudeLayer = Layers.FirstOrDefault(l => l.LayerType == LayerTypes.Altitude);
-        var precipitationLayer = Layers.FirstOrDefault(l => l.LayerType == LayerTypes.Precipitation);
-        var temperatureLayer = Layers.FirstOrDefault(l => l.LayerType == LayerTypes.Temperature);
-        
         WorldTile tile;
 
-        var _landValue = landmassLayer.GetTileAt(x, y);
-        var _altitudeValue = GetAltitude(landmassLayer.GetTileAt(x, y), altitudeLayer.GetTileAt(x, y));
-        var _temperatureValue = GetTemperature(temperatureLayer.GetTileAt(x, y));
-        var _precipitationValue = GetPrecipitation(precipitationLayer.GetTileAt(x, y));
+        var landValue = LandmassLayer.GetTileAt(x, y);
+        var altitudeValue = GetAltitude(LandmassLayer.GetTileAt(x, y), AltitudeLayer.GetTileAt(x, y));
+        var temperatureValue = GetTemperature(TemperatureLayer.GetTileAt(x, y));
+        var precipitationValue = GetPrecipitation(PrecipitationLayer.GetTileAt(x, y));
 
-        if (_landValue < _rules.WaterLevel)
+        if (landValue < _rules.WaterLevel)
             tile = new WorldTile(x, y, BiomeTypes.DeepOcean, 0, 0, 0);
         else
         {
             tile = new WorldTile(
                 x, 
                 y, 
-                Biomes.GetBiome(_landValue, _altitudeValue, _precipitationValue, _temperatureValue),
-                _altitudeValue,
-                _temperatureValue,
-                _precipitationValue);
+                Biomes.GetBiome(landValue, altitudeValue, precipitationValue, temperatureValue),
+                altitudeValue,
+                temperatureValue,
+                precipitationValue);
         }
 
         return tile;
