@@ -18,23 +18,23 @@ public class WorldTile
     /// 2D Y coordinate.
     /// </summary>
     public int YCoordinate { get; }
-    
+
     /// <summary>
     /// Altitude of this tile relative to sea-level in m
     /// </summary>
     public int Altitude { get; }
-    
+
     /// <summary>
     /// Average annual temperature of this tile in Cº
     /// </summary>
     public int Temperature { get; }
-    
+
     /// <summary>
     /// Average annual precipitation of this tile in cm
     /// </summary>
     public int Precipitation { get; }
 
-    
+
     public WorldTile(int x, int y, BiomeTypes biome, int altitude, int temperature, int precipitation)
     {
         Biome = biome;

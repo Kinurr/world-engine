@@ -11,67 +11,25 @@ public class Ruleset
     /// <param name="name">Name of the ruleset.</param>
     /// <param name="seed">Seed for the map generator.</param>
     /// <param name="waterLevel">Map water level.</param>
-    /// <param name="maxAltitude">Maximum altitude in m relative to sea level in m.</param>
-    /// <param name="minPrecipitation">Minimum average annual precipitation in cm.</param>
-    /// <param name="maxPrecipitation">Maximum average annual precipitation in cm.</param>
-    /// <param name="minTemperature">Minimum average annual temperature in Cº</param>
-    /// <param name="maxTemperature">Maximum average annual temperature in Cº</param>
-    public Ruleset(string name, 
-        int seed, 
-        float waterLevel = 0.0f, 
-        int maxAltitude = 1000, 
-        int minPrecipitation = 0,
-        int maxPrecipitation = 500,
-        int minTemperature = -10,
-        int maxTemperature = 30)
+    public Ruleset(string name, int seed, float waterLevel = 0.0f)
     {
         Name = name;
         Seed = seed;
         WaterLevel = waterLevel;
-        MaxAltitude = maxAltitude;
-        MinPrecipitation = minPrecipitation;
-        MaxPrecipitation = maxPrecipitation;
-        MinTemperature = minTemperature;
-        MaxTemperature = maxTemperature;
     }
 
     /// <summary>
     /// Name of the ruleset.
     /// </summary>
     public string Name { get; }
-    
+
     /// <summary>
     /// Seed for the map generator.
     /// </summary>
     public int Seed { get; }
-    
+
     /// <summary>
     /// Map water level.
     /// </summary>
     public float WaterLevel { get; }
-    
-    /// <summary>
-    /// Maximum altitude in m relative to sea level in m.
-    /// </summary>
-    public int MaxAltitude { get; }
-    
-    /// <summary>
-    /// Minimum average annual precipitation in cm.
-    /// </summary>
-    public int MinPrecipitation { get; }
-    
-    /// <summary>
-    /// Maximum average annual precipitation in cm.
-    /// </summary>
-    public int MaxPrecipitation { get; }
-
-    /// <summary>
-    /// Minimum average annual temperature in Cº 
-    /// </summary>
-    public int MinTemperature { get; }
-
-    /// <summary>
-    /// Maximum average annual temperature in Cº
-    /// </summary>
-    public int MaxTemperature { get; }
 }
