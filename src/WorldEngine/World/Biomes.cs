@@ -2,17 +2,18 @@ namespace WorldEngine.World;
 
 public static class Biomes
 {
-    public static BiomeTypes GetBiome(float landValue, int altitude, int precipitation, int temperature)
+    public static BiomeTypes GetBiome(int altitude, int precipitation, int temperature)
     {
-        if (altitude is >= 450 and < 550)
-            return BiomeTypes.MountainBase;
-        if (altitude is >= 550 and < 750)
-            return BiomeTypes.Mountain;
-        if (altitude is >= 750 and < 900)
-            return BiomeTypes.MountainTop;
-        if (altitude >= 900)
-            return BiomeTypes.Summit;
+        // TODO: Make all of this costumizeable to users.
 
+        if (altitude is >= 1700 and < 1850)
+            return BiomeTypes.MountainBase;
+        if (altitude is >= 1850 and < 1900)
+            return BiomeTypes.Mountain;
+        if (altitude is >= 1900 and < 1950)
+            return BiomeTypes.MountainTop;
+        if (altitude >= 1950)
+            return BiomeTypes.Summit;
 
         if (temperature <= 0)
         {
@@ -22,7 +23,7 @@ public static class Biomes
         {
             if (precipitation < 200)
             {
-                if (Math.Abs(landValue) < 0.05f)
+                if (altitude < 1250)
                     return BiomeTypes.Beach;
 
                 return BiomeTypes.Grassland;
@@ -39,7 +40,7 @@ public static class Biomes
             if (precipitation > 300)
                 return BiomeTypes.TropicalForest;
 
-            if (Math.Abs(landValue) < 0.05f)
+            if (altitude < 1250)
                 return BiomeTypes.Beach;
 
             return BiomeTypes.Grassland;

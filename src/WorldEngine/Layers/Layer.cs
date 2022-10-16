@@ -44,11 +44,13 @@ public class Layer
     /// </summary>
     /// <param name="noise">Noise map</param>
     /// <param name="type">Layer type</param>
-    public Layer(string name, LayerTypes type, INoise noise)
+    public Layer(string name, LayerTypes type, INoise noise, float minimumValue, float maximumValue)
     {
         Name = name;
         LayerType = type;
         _noise = noise;
+        MinimumValue = minimumValue;
+        MaximumValue = maximumValue;
     }
 
     /// <summary>
