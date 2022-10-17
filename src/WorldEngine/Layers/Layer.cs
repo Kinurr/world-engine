@@ -104,5 +104,6 @@ public class Layer
     /// </summary>
     /// <param name="value"></param>
     /// <returns></returns>
-    private float MapNoiseToLayerRange(float value) => value.Remap(-1, 1, MinimumValue, MaximumValue);
+    private float MapNoiseToLayerRange(float value) =>
+        value.Remap(-1, 1, MinimumValue, MaximumValue);
 }

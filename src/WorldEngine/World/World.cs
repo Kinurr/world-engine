@@ -42,7 +42,7 @@ public class World
         var temperatureValue = (int)TemperatureLayer.GetTileAt(x, y);
         var precipitationValue = (int)PrecipitationLayer.GetTileAt(x, y);
 
-        // Console.WriteLine($"Land: {landValue} - Altitude: {altitudeValue} - Temperature: {temperatureValue} - Precipitation: {precipitationValue}");
+        // Console.WriteLine($" Altitude: {altitudeValue} - Temperature: {temperatureValue} - Precipitation: {precipitationValue}");
 
         if (altitudeValue < _rules.WaterLevel)
             tile = new WorldTile(x, y, BiomeTypes.DeepOcean, 0, 0, 0);

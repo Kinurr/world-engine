@@ -6,20 +6,24 @@ public static class Biomes
     {
         // TODO: Make all of this costumizeable to users.
 
-        if (altitude is >= 1700 and < 1850)
-            return BiomeTypes.MountainBase;
-        if (altitude is >= 1850 and < 1900)
-            return BiomeTypes.Mountain;
-        if (altitude is >= 1900 and < 1950)
-            return BiomeTypes.MountainTop;
-        if (altitude >= 1950)
-            return BiomeTypes.Summit;
+        if (temperature > 5)
+        {
+            if (altitude is >= 1700 and < 1850)
+                return BiomeTypes.MountainBase;
+            if (altitude is >= 1850 and < 1900)
+                return BiomeTypes.Mountain;
+            if (altitude is >= 1900 and < 1950)
+                return BiomeTypes.MountainTop;
+            if (altitude >= 1950)
+                return BiomeTypes.Summit;
 
-        if (temperature <= 0)
+        }
+
+        if (temperature <= 5)
         {
             return BiomeTypes.Tundra;
         }
-        else if (temperature is > 0 and <= 12)
+        else if (temperature is > 5 and <= 12)
         {
             if (precipitation < 200)
             {
@@ -31,7 +35,7 @@ public static class Biomes
 
             return BiomeTypes.Forest;
         }
-        else if (temperature is > 12 and <= 17)
+        else if (temperature is > 12 and <= 25)
         {
 
             if (precipitation is > 200 and <= 300)

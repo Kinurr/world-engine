@@ -11,22 +11,22 @@ public class FractalPerlinNoise : INoise
     /// Noise frequency.
     /// </summary>
     private float _frequency;
-    
+
     /// <summary>
     /// Noise gain per octave.
     /// </summary>
     private float _fractalGain;
-    
+
     /// <summary>
     /// Number of octaves to pass noise through.
     /// </summary>
     private int _fractalOctaves;
-    
+
     /// <summary>
     /// Fractal lacunarity.
     /// </summary>
     private int _fractalLacunarity;
-    
+
     /// <summary>
     /// Seed for this noise generator.
     /// </summary>
@@ -78,7 +78,7 @@ public class FractalPerlinNoise : INoise
         {
             if (_generator != null)
                 return _generator.GetNoise(x, y);
-            
+
             throw new Exception("Noise generator hasn't been initialized");
         }
         catch (Exception e)

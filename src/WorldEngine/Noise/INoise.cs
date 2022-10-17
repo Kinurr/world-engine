@@ -17,7 +17,7 @@ public interface INoise
 
     /// <summary>
     /// Initializes noise generator.
-    /// This is a required step if the noise hasn't been given a seed parameter in the constructor.F
+    /// This is a required step if the noise hasn't been given a seed parameter in the constructor.
     /// </summary>
     /// <param name="seed"></param>
     public void SetupGenerator(int seed);
