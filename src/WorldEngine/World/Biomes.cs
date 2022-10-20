@@ -21,7 +21,7 @@ public static class Biomes
 
         if (temperature <= 5)
         {
-            return BiomeTypes.Tundra;
+            return precipitation > 200 ? BiomeTypes.ArcticForest : BiomeTypes.Tundra;
         }
         else if (temperature is > 5 and <= 12)
         {

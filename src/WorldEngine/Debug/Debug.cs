@@ -40,6 +40,9 @@ public static class Tools
                     case BiomeTypes.DeepOcean:
                         color = SKColors.DarkBlue;
                         break;
+                    case BiomeTypes.FrozenOcean:
+                        color = SKColors.LightBlue;
+                        break;
                     case BiomeTypes.Beach:
                         color = SKColors.LightYellow;
                         break;
@@ -57,6 +60,9 @@ public static class Tools
                         break;
                     case BiomeTypes.TropicalForest:
                         color = SKColors.DarkGreen;
+                        break;
+                    case BiomeTypes.ArcticForest:
+                        color = new SKColor(212, 254, 212);
                         break;
                     case BiomeTypes.Tundra:
                         color = SKColors.White;

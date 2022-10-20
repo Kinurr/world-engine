@@ -37,6 +37,14 @@ public class FractalPerlinNoise : INoise
     /// </summary>
     private FastNoiseLite? _generator;
 
+    /// <summary>
+    /// Constructor for 2D fractal perlin noise.
+    /// </summary>
+    /// <param name="frequency">Noise frequency. Higher value results in </param>
+    /// <param name="fractalOctaves"></param>
+    /// <param name="fractalGain"></param>
+    /// <param name="fractalLacunarity"></param>
+    /// <param name="seed"></param>
     public FractalPerlinNoise(float frequency, int fractalOctaves, float fractalGain, int fractalLacunarity, int? seed = null)
     {
         _frequency = frequency;
