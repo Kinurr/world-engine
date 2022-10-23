@@ -45,7 +45,9 @@ public class World
         // Console.WriteLine($" Altitude: {altitudeValue} - Temperature: {temperatureValue} - Precipitation: {precipitationValue}");
 
         if (altitudeValue < _rules.WaterLevel)
-            tile = new WorldTile(x, y, temperatureValue <= 0 ? BiomeTypes.FrozenOcean : BiomeTypes.DeepOcean, 0, 0, 0);
+            if(temperatureValue <= 0)
+            tile = new WorldTile(x, y, BiomeTypes.FrozenOcean, altitudeValue, temperatureValue, precipitationValue);
+            else tile = new WorldTile(x, y, altitudeValue > _rules.WaterLevel - 100 ? BiomeTypes.ShallowOcean : BiomeTypes.DeepOcean, altitudeValue, temperatureValue, precipitationValue);
         else
         {
             tile = new WorldTile(
