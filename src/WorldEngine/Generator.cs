@@ -19,28 +19,33 @@ public class Generator
 {
     public Ruleset Rules { get; set; }
 
-    public Layer LandmassLayer { get; set; }
-    
     public Layer AltitudeLayer { get; set; }
-    
+
     public Layer PrecipitationLayer { get; set; }
-    
+
     public Layer TemperatureLayer { get; set; }
 
-    public Generator(Ruleset rules, Layer landmassLayer, Layer altitudeLayer, Layer precipitationLayer, Layer temperatureLayer)
+    public Generator(Ruleset rules, Layer altitudeLayer, Layer precipitationLayer,
+        Layer temperatureLayer)
     {
         Rules = rules;
-        LandmassLayer = landmassLayer;
         AltitudeLayer = altitudeLayer;
         PrecipitationLayer = precipitationLayer;
         TemperatureLayer = temperatureLayer;
     }
 
+    public Generator(Profile profile)
+    {
+        Rules = profile.Rules;
+        AltitudeLayer = profile.AltitudeLayer;
+        PrecipitationLayer = profile.PrecipitationLayer;
+        TemperatureLayer = profile.TemperatureLayer;
+    }
+
     public World.World CreateWorld()
     {
-        var world = new World.World(Rules, LandmassLayer, AltitudeLayer, PrecipitationLayer, TemperatureLayer);
+        var world = new World.World(Rules, AltitudeLayer, PrecipitationLayer, TemperatureLayer);
 
         return world;
     }
-    
 }

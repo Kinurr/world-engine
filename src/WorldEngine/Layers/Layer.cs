@@ -1,4 +1,5 @@
 ﻿using WorldEngine.Noise;
+using WorldEngine.Utils;
 
 namespace WorldEngine.Layers;
 
@@ -18,6 +19,22 @@ public class Layer
     public int Id { get; set; }
 
     /// <summary>
+    /// Layer name. Used to identify this layer in the layer collection.
+    /// </summary>
+    public string Name { get; set; }
+
+    /// <summary>
+    /// Upper limit for this layer's tile value;
+    /// </summary>
+    public float MaximumValue { get; set; }
+
+
+    /// <summary>
+    /// Lower limit for this layer's tile value;
+    /// </summary>
+    public float MinimumValue { get; set; }
+
+    /// <summary>
     /// Noise profile.
     /// </summary>
     private INoise _noise { get; }
@@ -27,10 +44,13 @@ public class Layer
     /// </summary>
     /// <param name="noise">Noise map</param>
     /// <param name="type">Layer type</param>
-    public Layer(LayerTypes type, INoise noise)
+    public Layer(string name, LayerTypes type, INoise noise, float minimumValue, float maximumValue)
     {
+        Name = name;
         LayerType = type;
         _noise = noise;
+        MinimumValue = minimumValue;
+        MaximumValue = maximumValue;
     }
 
     /// <summary>
@@ -40,7 +60,7 @@ public class Layer
     public void SetupGenerator(int seed)
     {
         // If noise has no seed, initialize noise generator with seed.
-        if(_noise.Seed == null)
+        if (_noise.Seed == null)
             _noise.SetupGenerator(seed);
     }
 
@@ -50,7 +70,7 @@ public class Layer
     /// <param name="x">X coordinate value.</param>
     /// <param name="y">Y coordinate value.</param>
     /// <returns></returns>
-    public float GetTileAt(int x, int y) => _noise.Get(x, y);
+    public float GetTileAt(int x, int y) => MapNoiseToLayerRange(_noise.Get(x, y));
 
     /// <summary>
     /// Returns a chunk of tiles 
@@ -78,4 +98,12 @@ public class Layer
 
         return chunk;
     }
+
+    /// <summary>
+    /// Maps a noise value to this layer's value range.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    private float MapNoiseToLayerRange(float value) =>
+        value.Remap(-1, 1, MinimumValue, MaximumValue);
 }
