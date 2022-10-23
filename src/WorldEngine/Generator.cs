@@ -34,6 +34,14 @@ public class Generator
         TemperatureLayer = temperatureLayer;
     }
 
+    public Generator(Profile profile)
+    {
+        Rules = profile.Rules;
+        AltitudeLayer = profile.AltitudeLayer;
+        PrecipitationLayer = profile.PrecipitationLayer;
+        TemperatureLayer = profile.TemperatureLayer;
+    }
+
     public World.World CreateWorld()
     {
         var world = new World.World(Rules, AltitudeLayer, PrecipitationLayer, TemperatureLayer);
