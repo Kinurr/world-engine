@@ -32,9 +32,9 @@ public class Profile
         {
             case DefaultProfileSettings.EndlessEarthlike:
                 Rules = new Ruleset(defaultProfile.ToString(), seed, 1200);
-                AltitudeLayer = new Layer("Altitude", LayerTypes.Altitude, new FractalPerlinNoise(0.005f, 6, 0.4f, 2), 0, 2500);
+                AltitudeLayer = new Layer("Altitude", LayerTypes.Altitude, new FractalPerlinNoise(0.003f, 6, 0.4f, 2), 0, 2500);
                 PrecipitationLayer = new Layer("Precipitation", LayerTypes.Precipitation, new SinusoidalNoise(offset: new Vector2(0, -100), periodMultiplier: 0.012f, helperNoiseMultiplier: 1.8f), 0, 350);
-                TemperatureLayer = new Layer("Temperature", LayerTypes.Temperature, new SinusoidalNoise(offset: new Vector2(0, -200), helperNoiseMultiplier: 2f), 0, 27);
+                TemperatureLayer = new Layer("Temperature", LayerTypes.Temperature, new SinusoidalNoise(offset: new Vector2(0, -200), helperNoiseMultiplier: 0.8f), 0, 27);
 
                 break;
             case DefaultProfileSettings.EndlessFractal:
