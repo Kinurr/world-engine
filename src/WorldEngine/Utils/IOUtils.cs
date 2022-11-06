@@ -1,6 +1,6 @@
 ﻿using SkiaSharp;
 
-namespace WorldEngine.Utils;
+namespace WorldEngine.Core.Utils;
 
 public static class IOUtils
 {

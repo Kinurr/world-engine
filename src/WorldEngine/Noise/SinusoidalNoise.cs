@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace WorldEngine.Noise;
+namespace WorldEngine.Core.Noise;
 
 /// <summary>
 /// 2 Dimensional noisy sine wave.

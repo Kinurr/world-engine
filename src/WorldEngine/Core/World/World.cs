@@ -1,8 +1,8 @@
-﻿using WorldEngine.Layers;
-using WorldEngine.Rules;
-using WorldEngine.Utils;
+﻿using WorldEngine.Core.Layers;
+using WorldEngine.Core.Rules;
+using WorldEngine.Core.Utils;
 
-namespace WorldEngine.World;
+namespace WorldEngine.Core.World;
 
 public class World
 {
@@ -45,9 +45,10 @@ public class World
         // Console.WriteLine($" Altitude: {altitudeValue} - Temperature: {temperatureValue} - Precipitation: {precipitationValue}");
 
         if (altitudeValue < _rules.WaterLevel)
-            if(temperatureValue <= 0)
-            tile = new WorldTile(x, y, BiomeTypes.FrozenOcean, altitudeValue, temperatureValue, precipitationValue);
-            else tile = new WorldTile(x, y, altitudeValue > _rules.WaterLevel - 100 ? BiomeTypes.ShallowOcean : BiomeTypes.DeepOcean, altitudeValue, temperatureValue, precipitationValue);
+            if(temperatureValue <= 5)
+                tile = new WorldTile(x, y, BiomeTypes.FrozenOcean, altitudeValue, temperatureValue, precipitationValue);
+            else
+                tile = new WorldTile(x, y, altitudeValue > _rules.WaterLevel - 100 ? BiomeTypes.ShallowOcean : BiomeTypes.DeepOcean, altitudeValue, temperatureValue, precipitationValue);
         else
         {
             tile = new WorldTile(

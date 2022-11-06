@@ -1,16 +1,16 @@
-﻿using WorldEngine.Layers;
-using WorldEngine.Rules;
+﻿using WorldEngine.Core.Layers;
+using WorldEngine.Core.Rules;
 
-namespace WorldEngine;
+namespace WorldEngine.Core;
 
 using System.ComponentModel;
 using System.Data;
 using SkiaSharp;
 using Noise;
-using WorldEngine.Layers;
-using WorldEngine.Rules;
-using WorldEngine.Utils;
-using WorldEngine.World;
+using WorldEngine.Core.Layers;
+using WorldEngine.Core.Rules;
+using WorldEngine.Core.Utils;
+using WorldEngine.Core.World;
 
 /// <summary>
 /// A high level object capable of randomly generating a 2-dimensional map from a given ruleset and multiple layers.

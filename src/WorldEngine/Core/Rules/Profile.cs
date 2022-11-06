@@ -1,9 +1,9 @@
 using System.Numerics;
-using WorldEngine.Layers;
-using WorldEngine.Noise;
-using WorldEngine.Rules;
+using WorldEngine.Core.Layers;
+using WorldEngine.Core.Noise;
+using WorldEngine.Core.Rules;
 
-namespace WorldEngine.World;
+namespace WorldEngine.Core.World;
 
 public class Profile
 {

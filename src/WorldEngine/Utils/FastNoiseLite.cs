@@ -1,4 +1,4 @@
-﻿namespace WorldEngine.Utils
+﻿namespace WorldEngine.Core.Utils
 {
 // MIT License
 //

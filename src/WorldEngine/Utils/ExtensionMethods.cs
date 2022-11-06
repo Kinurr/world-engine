@@ -1,4 +1,4 @@
-namespace WorldEngine.Utils;
+namespace WorldEngine.Core.Utils;
 
 /// <summary>
 /// Remaps a float value from a source range to a target range.

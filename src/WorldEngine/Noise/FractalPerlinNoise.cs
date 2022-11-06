@@ -1,6 +1,6 @@
-﻿using WorldEngine.Utils;
+﻿using WorldEngine.Core.Utils;
 
-namespace WorldEngine.Noise;
+namespace WorldEngine.Core.Noise;
 
 /// <summary>
 /// Generator for fractal perlin noise.

@@ -1,7 +1,7 @@
-﻿using WorldEngine.Noise;
-using WorldEngine.Utils;
+﻿using WorldEngine.Core.Noise;
+using WorldEngine.Core.Utils;
 
-namespace WorldEngine.Layers;
+namespace WorldEngine.Core.Layers;
 
 /// <summary>
 /// Represents a map layer.

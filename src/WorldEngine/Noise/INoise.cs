@@ -1,4 +1,4 @@
-﻿namespace WorldEngine.Noise;
+﻿namespace WorldEngine.Core.Noise;
 
 public interface INoise
 {

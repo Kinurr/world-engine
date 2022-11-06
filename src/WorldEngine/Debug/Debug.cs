@@ -1,8 +1,8 @@
 using System.Net.NetworkInformation;
 using SkiaSharp;
-using WorldEngine.World;
+using WorldEngine.Core.World;
 
-namespace WorldEngine.Debug;
+namespace WorldEngine.Core.Debug;
 
 public static class Tools
 {

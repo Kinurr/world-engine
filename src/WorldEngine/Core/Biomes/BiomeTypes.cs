@@ -1,4 +1,4 @@
-namespace WorldEngine.World;
+namespace WorldEngine.Core.World;
 
 public enum BiomeTypes
 {
