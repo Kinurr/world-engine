@@ -4,11 +4,26 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <PackageId>WorldEngine</PackageId>
+        <Version>0.1.0</Version>
+        <Authors>José Figueiredo</Authors>
+        <Description>A highly customizable dotnet core library that procedurally generates tile-based fictional worlds.</Description>
+        <Title>World Engine</Title>
+        <Copyright></Copyright>
+        <PackageProjectUrl>https://github.com/Kinurr/world-engine</PackageProjectUrl>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <DebugType>embedded</DebugType>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+      <DebugType>embedded</DebugType>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="SkiaSharp" Version="2.88.1-preview.63" />
-      <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="2.88.1-preview.63" />
+      <PackageReference Include="SkiaSharp" Version="2.88.3" />
+      <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="2.88.3" />
     </ItemGroup>
 
 </Project>
