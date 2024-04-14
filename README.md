@@ -4,7 +4,7 @@ A C# library that generates tile-based fictional worlds.
 
 ## What's this for?
 
-The purpose of this project is to provide developers with a practical tool to procedurally generate interesting worlds which can also be extended and customized. Its primarily meant to be used in games and world-building tools but it can be changed to fit other needs.
+The purpose of this project is to provide developers with a practical tool to procedurally generate interesting worlds which can also be extended and customized. It's meant primarily to be used in games and world-building tools but it can be changed to fit other needs.
 
 ## Examples
 
